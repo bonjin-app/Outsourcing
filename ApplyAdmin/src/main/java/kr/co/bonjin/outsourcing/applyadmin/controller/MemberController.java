@@ -16,7 +16,7 @@ public class MemberController {
      */
     @GetMapping("/login")
     public String goLoginPage() {
-        return "sample/dashboard";
+        return "member/login";
     }
 
     /**
