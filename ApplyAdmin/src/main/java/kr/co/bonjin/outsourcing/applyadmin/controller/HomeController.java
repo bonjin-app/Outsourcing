@@ -11,12 +11,12 @@ public class HomeController {
      * @return
      */
     @GetMapping(value= "/")
-    public String root() {
+    public String rootPage() {
         return "home";
     }
 
     @GetMapping(value = {"/home", "/main"})
-    public String home() {
+    public String homePage() {
         return "redirect:/";
     }
 }
