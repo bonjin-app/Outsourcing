@@ -13,6 +13,13 @@ public interface DocumentService {
      */
     PageResultDto<DocumentResponseDto, Document> findAllPageableIdolGroups(PageRequestDto pageRequestDto);
 
+    /**
+     * 단건 조회
+     * @param id
+     * @return
+     */
+    DocumentResponseDto findById(Long id);
+
     default DocumentResponseDto entityToDto(Document entity) {
         DocumentResponseDto dto = DocumentResponseDto.builder()
                 .id(entity.getId())

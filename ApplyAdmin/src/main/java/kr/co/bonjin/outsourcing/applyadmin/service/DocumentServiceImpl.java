@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 @RequiredArgsConstructor
@@ -27,5 +28,12 @@ public class DocumentServiceImpl implements DocumentService {
         Page<Document> result = documentRepository.findAll(pageable);
         Function<Document, DocumentResponseDto> fn = (entity -> entityToDto(entity));
         return new PageResultDto<>(result, fn);
+    }
+
+    @Override
+    public DocumentResponseDto findById(Long id) {
+        Document result = documentRepository.findById(id).get();
+        DocumentResponseDto dto = entityToDto(result);
+        return dto;
     }
 }
