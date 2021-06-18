@@ -4,7 +4,7 @@
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
             <li class="nav-item nav-profile border-bottom">
-                <a href="#null" class="nav-link flex-column">
+                <a th:href="@{/}" class="nav-link flex-column">
                     <div class="nav-profile-image">
                         <img th:src="@{/custom/images/person.png}" alt="person" />
                         <!--change to offline or busy as needed-->
@@ -19,7 +19,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/document}">
-                    <i class="mdi mdi-compass-outline menu-icon"></i>
+                    <i class="mdi mdi-file-document menu-icon"></i>
                     <span class="menu-title">Documents</span>
                 </a>
             </li>
