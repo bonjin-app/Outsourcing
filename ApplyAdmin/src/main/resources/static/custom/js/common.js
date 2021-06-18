@@ -1,3 +1,21 @@
+$(function() {
+    // 이미지 Drag 방지
+    $('img').on('dragstart', function(event) { event.preventDefault(); });
+
+    // input 입력시 오류 메시지 제거
+    $("input").focus(function() {
+        $(".help-block").text("");
+    });
+
+    // input 자동완성 제거
+    $("form").attr("autocomplete","off");
+
+    // 숫자만 입력
+    $("input:text[numberOnly]").on("keyup", function() {
+        $(this).val($(this).val().replace(/[^0-9]/g,""));
+    });
+});
+
 /**
  * Go Detail Page
  * @param element

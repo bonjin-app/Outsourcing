@@ -105,4 +105,4 @@ spring:
 
 ## Upload PATH
 upload-path:
-  directory: /Users/gigas/Downloads/uploads
+  directory: ./

@@ -110,9 +110,9 @@
                         <h3 class="col-md-10">온리인 신청서</h3>
                         <div class="col-md-6">
                             <ul class="data-list">
-                                <li><input type="text" name="name" id="name"  class="required form-control" placeholder="성명(신청인)"></li>
-                                <li><input type="text" name="residentId" id="residentId" class="required form-control" placeholder="주민등록번호"></li>
-                                <li><input type="text" name="phone" id="phone"  class="required form-control" placeholder="핸드폰번호 01049230000"></li>
+                                <li><input type="text" name="name" id="name"  class="required form-control" maxLength="30" placeholder="성명(신청인)"></li>
+                                <li><input type="text" numberonly name="residentId" id="residentId" class="required form-control" maxLength="13" placeholder="주민등록번호"></li>
+                                <li><input type="text" numberonly name="phone" id="phone" class="required form-control" maxLength="11" placeholder="핸드폰번호 010-xxxx-xxxx"></li>
                             </ul>
                         </div><!-- end col-md-6 -->
 
@@ -123,8 +123,8 @@
                                     <button id="addressButton" class="btn btn-primary">우편검색</button>
                                     <input type="text" name="address" id="address"  class="required form-control" disabled placeholder="주소">
                                 </li>
-                                <li><input type="text" name="addressDetail" id="addressDetail"  class="required form-control" placeholder="상세주소"></li>
-                                <li><input type="text" name="recommender" id="recommender"  class="required form-control" placeholder="추천인"></li>
+                                <li><input type="text" name="addressDetail" id="addressDetail"  class="required form-control" maxLength="100" placeholder="상세주소"></li>
+                                <li><input type="text" name="recommender" id="recommender"  class="required form-control" maxLength="30" placeholder="추천인"></li>
                             </ul>
 
                             <input type="hidden" name="postcode" id="postcode" class="required form-control">
@@ -303,6 +303,7 @@
 <script th:src="@{/apply/js/fancy_func.js}" type="text/javascript"></script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script th:src="@{/custom/js/common.js}"></script>
 <script th:src="@{/custom/js/address.js}"></script>
 <script th:src="@{/custom/js/apply-register.js}" type="text/javascript"></script>
 
