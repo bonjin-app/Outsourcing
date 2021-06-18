@@ -59,6 +59,9 @@
     <!-- Support media queries for IE8 -->
     <script th:src="@{/apply/js/respond.min.js}"></script>
 
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script th:src="@{/custom/js/address.js}"></script>
+
 </head>
 <style>
 
@@ -105,28 +108,31 @@
 
 
 
-        <form name="example-1" id="wrapped" action="survey_send_1.php" method="POST" >
+        <form name="example-1" id="wrapped" action="" method="POST" >
             <div id="middle-wizard">
                 <div class="step">
                     <div class="row">
                         <h3 class="col-md-10">온리인 신청서</h3>
                         <div class="col-md-6">
                             <ul class="data-list">
-                                <li><input type="text" name="firstname" id="firstname"  class="required form-control" placeholder="성명(신청인)"></li>
-                                <li><input type="text" name="lastname" id="lastname" class="required form-control" placeholder="주민등록번호"></li>
-                                <li><input type="number" name="phone" id="phone"  class="required form-control" placeholder="핸드폰번호 01049230000"></li>
+                                <li><input type="text" name="name" id="name"  class="required form-control" placeholder="성명(신청인)"></li>
+                                <li><input type="text" name="residentId" id="residentId" class="required form-control" placeholder="주민등록번호"></li>
+                                <li><input type="text" name="phone" id="phone"  class="required form-control" placeholder="핸드폰번호 01049230000"></li>
                             </ul>
                         </div><!-- end col-md-6 -->
 
                         <div class="col-md-6">
 
                             <ul class="data-list">
-                                <li><button class="btn btn-primary">우편검색</button> <input type="address" name="address" id="address"  class="required form-control" placeholder="주소"></li>
-                                <li><input type="address" name="address" id="address"  class="required form-control" placeholder="상세주소"></li>
-                                <li><input type="text" name="firstname" id="firstname"  class="required form-control" placeholder="추천인"></li>
+                                <li>
+                                    <button id="addressButton" class="btn btn-primary">우편검색</button>
+                                    <input type="text" name="address" id="address"  class="required form-control" disabled placeholder="주소">
+                                </li>
+                                <li><input type="text" name="addressDetail" id="addressDetail"  class="required form-control" placeholder="상세주소"></li>
+                                <li><input type="text" name="recommender" id="recommender"  class="required form-control" placeholder="추천인"></li>
                             </ul>
 
-
+                            <input type="hidden" name="postcode" id="postcode" class="required form-control">
                         </div><!-- end col-md-6 -->
                     </div><!-- end row -->
 
@@ -140,8 +146,6 @@
                             </canvas>
                         </div>
                     </div>
-                    <b
-
 
                     <div class="row">
                         <div class="col-md-4 col-md-offset-4">
@@ -298,6 +302,12 @@
 
 <script>
     (function() {
+        $("#addressButton").click(function (event) {
+            event.preventDefault();
+
+            performAddress();
+        });
+
         window.requestAnimFrame = (function(callback) {
             return window.requestAnimationFrame ||
                 window.webkitRequestAnimationFrame ||

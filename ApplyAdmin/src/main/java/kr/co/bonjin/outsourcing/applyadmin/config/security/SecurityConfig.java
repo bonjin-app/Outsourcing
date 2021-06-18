@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // ROLE 권한 분리 URL 정의
                 .antMatchers("/api/**").permitAll()	// API 요청 전체 공개
                 .antMatchers("/member/**").permitAll() // MEMBER 요청 전체 공개
+                .antMatchers("/apply/**").permitAll() // APPLY 요청 전체 공개
                 .antMatchers("/**").authenticated()   // 모든 요청에 대해 인증을 요구하는 규칙
 
                 // BasicAuth 사용하여 로그인 요구
