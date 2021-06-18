@@ -23,10 +23,6 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Oracle 사용시 Sequence 로 바꾸기
     private Long id;
 
-    // 파일 아이디
-    @Column(name = "file_no")
-    private String fileNo;
-
     // 파일명
     @Column(name = "file_nm")
     private String fileNm;

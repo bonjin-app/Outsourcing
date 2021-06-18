@@ -40,6 +40,12 @@ public class DocumentController {
         return "document/list";
     }
 
+    /**
+     * 상세 페이지
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping(value = "/{id}")
     public String detailPage(@PathVariable Long id, Model model) {
         DocumentResponseDto document = documentService.findById(id);

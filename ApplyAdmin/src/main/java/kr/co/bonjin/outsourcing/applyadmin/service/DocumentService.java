@@ -25,8 +25,12 @@ public interface DocumentService {
                 .id(entity.getId())
                 .name(entity.getName())
                 .residentId(entity.getResidentId())
+                .recommender(entity.getRecommender())
                 .phone(entity.getPhone())
                 .address(entity.getAddress().getAddress())
+                .addressDetail(entity.getAddress().getDetailAddress())
+                .addressPostcode(entity.getAddress().getPostcode())
+                .fileId(entity.getImage().getId())
                 .createdDate(entity.getCreatedDate())
                 .build();
         return dto;
