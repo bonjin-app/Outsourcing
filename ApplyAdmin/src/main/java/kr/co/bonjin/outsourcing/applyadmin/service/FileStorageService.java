@@ -65,11 +65,8 @@ public class FileStorageService {
      */
     public String storeFile(MultipartFile file, String saveFileNm) {
 
-        // 앱에서 Base64 Encode 해서 보낸 데이터 Decode
-        String decodeFileName = ServiceUtil.base64Decoded(file.getOriginalFilename());
-
         // 파일 이름 표준화
-        String fileName = StringUtils.cleanPath(decodeFileName);
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         String uploadPath = getUploadPath();
 
         try {
