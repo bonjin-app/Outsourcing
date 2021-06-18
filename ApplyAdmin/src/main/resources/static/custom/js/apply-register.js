@@ -22,9 +22,52 @@
         performAddress();
     });
 
-    $("#applyButton").click(function(event) {
-       event.preventDefault();
-
-       print("fasdfasdf");
-    });
 })();
+
+function isCanvasBlank(canvas) {
+    return !canvas.getContext('2d')
+        .getImageData(0, 0, canvas.width, canvas.height).data
+        .some(channel => channel !== 0);
+}
+
+function applyValidate(canvas) {
+    var $name = $("#name");
+    var $residentId = $("#residentId");
+    var $phone = $("#phone");
+    var $address = $("#address");
+    var $addressDetail = $("#addressDetail");
+    var $terms = $("input[name=terms]");
+
+    if(!$name.val()) {
+        alert("이름을 입력해주세요.");
+        return false;
+
+    }else if(!$residentId.val()) {
+        alert("주민번호를 입력해주세요.");
+        return false;
+
+    } else if (!$phone.val()) {
+        alert("핸드폰번호를 입력해주세요.");
+        return false;
+
+    } else if (!$address.val()) {
+        alert("주소를 입력해주세요.");
+        return false;
+
+    } else if (!$addressDetail.val()) {
+        alert("상세주소를 입력해주세요.");
+        return false;
+
+    } else if (isCanvasBlank(canvas)) {
+        alert("사인을 진행해주세요.");
+        return false;
+
+    } else if (!$terms.prop("checked")) {
+        alert("약관을 동의헤주세요.");
+        return false;
+
+
+    } else {
+        return true;
+    }
+}
