@@ -1,10 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Bonjin Administrator">
+    <meta name="keywords" content="bonjin, 팬덤, 연예인, 아이돌">
+
+    <title>관리자 로그인</title>
+
+    <link rel="stylesheet" th:href="@{/custom/css/admin.css}">
+    <script th:src="@{/custom/js/common/common.js}"></script>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 </head>
-<body>
-    로그인
+<body class="bg-gradient-primary">
+
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">관리자 로그인</h1>
+                                </div>
+                                <form class="needs-validation member" th:action="@{/member/login}" method="post" novalidate>
+                                    <div class="form-group">
+                                        <input name="username" type="text" class="form-control form-control-member" id="InputUsername" value="admin" aria-describedby="emailHelp" placeholder="아이디 입력" required>
+                                        <div class="invalid-feedback">Please provide a valid Username</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="password" type="password" class="form-control form-control-member" id="InputPassword" value="1234" placeholder="비밀번호 입력" required>
+                                        <div class="invalid-feedback">Please provide a valid Password</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                            <label class="custom-control-label" for="customCheck">아이디 기억하기</label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-member btn-block">로그인</button>
+<!--                                        <hr>-->
+<!--                                        <a href="#" class="btn btn-google btn-member btn-block">-->
+<!--                                            <i class="fab fa-google fa-fw"></i> 구글 로그인-->
+<!--                                        </a>-->
+<!--                                        <a href="#" class="btn btn-facebook btn-member btn-block">-->
+<!--                                            <i class="fab fa-facebook-f fa-fw"></i> 페이스북 로그인-->
+<!--                                        </a>-->
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" th:href="@{/member/forgot-password}">비밀번호 찾기</a>
+                                </div>
+<!--                                    <div class="text-center">-->
+<!--                                        <a class="small" th:href="@{/member/register}">회원가입</a>-->
+<!--                                    </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+
+        var rememberId = getCookie("rememberId");
+        if (rememberId != "") {
+            document.getElementById("customCheck").checked = true;
+            document.getElementById("InputUsername").value = rememberId;
+        }
+
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+
+                    // rememberId
+                    if(document.getElementById("customCheck").checked == true) {
+                        setCookie("rememberId", document.getElementById("InputUsername").value, 7);
+                    } else {
+                        deleteCookie("rememberId");
+                    }
+                }, false);
+            });
+
+        }, false);
+    })();
+</script>
+
 </body>
 </html>
