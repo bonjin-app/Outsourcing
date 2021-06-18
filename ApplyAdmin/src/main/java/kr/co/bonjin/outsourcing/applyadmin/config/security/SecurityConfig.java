@@ -3,6 +3,7 @@ package kr.co.bonjin.outsourcing.applyadmin.config.security;
 import kr.co.bonjin.outsourcing.applyadmin.constants.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -93,6 +94,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 //                	.addFilterBefore(filter, CsrfFilter.class)	// 문자 인코딩 filter보다 Csrf Filter를 먼저 실행
                 .csrf().disable()
+        ;
+    }
+
+    /*
+     * 스프링 시큐리티 룰을 무시하게 하는 Url 규칙.
+     */
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring()
+                .antMatchers("/resources/**")
+                .antMatchers("/images/**")
+                .antMatchers("/css/**")
+                .antMatchers("/js/**")
         ;
     }
 }
