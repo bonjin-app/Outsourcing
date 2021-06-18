@@ -1,0 +1,104 @@
+#################################
+#  START_DEV
+#################################
+server:
+  # ===============================
+  # = Embedded Server Config
+  # ===============================
+  # Server Port
+  port: 8001
+
+  # whitelabel 기본 오류 페이지 비활성화
+  error:
+    whitelabel:
+      enabled: false
+
+  # Spring boot 2.x session timeout
+  servlet:
+    session:
+      # Default 30m
+      timeout: 10m
+
+spring:
+  # ===============================
+  # = DEV TOOLS
+  # ===============================
+  devtools:
+    livereload:
+      enabled: true
+
+    # 서버를 재시작 하지않고 수정된 내용이 반영
+    restart:
+      enabled: false
+
+  # Compile 하지 않고 반영
+  thymeleaf:
+    cache: false
+
+  #  security:
+  #    user:
+  #      name: admin
+  #      password: 1234
+
+
+  # ===============================
+  # = DATA SOURCE (MARIADB)
+  # ===============================
+  datasource:
+    # 기본 DB
+    url: jdbc:mariadb://gigas.synology.me:3306/outsourcing-applyadmin
+    username: outsourcing
+    password: 1234
+
+  # ===============================
+  # = SERVLET
+  # ===============================
+  # Default 50MB
+  servlet:
+    multipart:
+      # MULTIPART 사용
+      enabled: true
+      # 디스크에 파일을 쓰는 값
+      file-size-threshold: 2KB
+      # 최대 파일 크기
+      max-file-size: 50MB
+      # 최대 요청 크기
+      max-request-size: 50MB
+
+  # ===============================
+  # = JPA / HIBERNATE
+  # ===============================
+  # SQL 문장의 로깅 활성화
+  jpa:
+    show-sql: true
+
+    # DDL 모드
+    # create  : 기존테이블 삭제 후 다시 생성
+    # create-drop: create 와 같으나 종료시점에 테이블 DROP
+    # update: 변경분만 반영
+    # validate: 엔티티와 테이블이 정상 매핑되었는지만 확인
+    # none: 사용하지 않음
+    hibernate.ddl-auto: update
+
+    # 시작시 스키마 초기화
+    generate-ddl: false
+
+    # CONSOLE 에 SQL문을 가독성있게 표시
+    properties:
+      hibernate:
+        #
+        format_sql: true
+
+        # HINT 표시
+        use_sql_comments: true
+
+        # SQL 언어 MariaDB
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  # ===============================
+  # = BANNER (ANSI Shadow)
+  # = http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
+  # ===============================
+  banner:
+    image:
+      location: banner.txt
