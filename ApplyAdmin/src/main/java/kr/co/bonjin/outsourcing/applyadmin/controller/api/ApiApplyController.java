@@ -34,7 +34,8 @@ public class ApiApplyController {
 
         List<Document> result = documentRepository.findByPhone(applyRequestDto.getPhone());
         if (result.size() > 0) {
-            throw new ApiException(ApiError.MISSING_PARAMETER, "Phone Not Unique.");
+//            throw new ApiException(ApiError.MISSING_PARAMETER, "Phone Not Unique.");
+            return new ApiDataResponse<>(ApiError.INVALID_PARAMETER);
         }
 
         try {

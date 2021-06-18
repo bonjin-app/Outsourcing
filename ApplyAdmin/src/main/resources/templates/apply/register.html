@@ -468,9 +468,12 @@
                     contentType:false,  // file 전송시 필수
                     cache:false,
                     success:function(response) {
-                        console.log(response);
+                        if (response.data.code == "1001") {
+                            alert("이미 접수된 휴대폰 번호 입니다.")
 
-                        location.href = "/apply/complete";
+                        } else {
+                            location.href = "/apply/complete";
+                        }
                     },
                     error:function(request, status, error){
                         alert("접수중 오류가 발생했습니다. 다시 시도해주세요.")
