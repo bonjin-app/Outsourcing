@@ -1,5 +1,6 @@
 package kr.co.bonjin.outsourcing.applyadmin.entity;
 
+import kr.co.bonjin.outsourcing.applyadmin.entity.common.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor // 인자를 모두 갖춘 생성자를 자동으로 생성합니다.
 @ToString
 @Table(name = "document") // 'document' 테이블과 매핑됨을 명시
-public class Document {
+public class Document extends BaseEntity {
     @Id
     @Column(name = "document_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Oracle 사용시 Sequence 로 바꾸기
