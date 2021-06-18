@@ -6,6 +6,8 @@ import kr.co.bonjin.outsourcing.applyadmin.controller.dto.ApplyRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.entity.Address;
 import kr.co.bonjin.outsourcing.applyadmin.entity.Document;
 import kr.co.bonjin.outsourcing.applyadmin.entity.Image;
+import kr.co.bonjin.outsourcing.applyadmin.exception.ApiError;
+import kr.co.bonjin.outsourcing.applyadmin.exception.ApiException;
 import kr.co.bonjin.outsourcing.applyadmin.repository.DocumentRepository;
 import kr.co.bonjin.outsourcing.applyadmin.service.FileStorageService;
 import lombok.RequiredArgsConstructor;
@@ -31,31 +33,36 @@ public class ApiApplyController {
         String fileName = file.getOriginalFilename();
         String savePath = fileStorageService.storeFile(file, saveFileNm);
 
-        Image image = Image.builder()
-                .fileNm(fileName)
-                .fileExtn(fileName.substring(fileName.lastIndexOf(".")+1))
-                .savePath(savePath)
-                .saveFileNm(saveFileNm)
-                .fileSize(file.getSize())
-                .build();
+        try {
+            Image image = Image.builder()
+                    .fileNm(fileName)
+                    .fileExtn(fileName.substring(fileName.lastIndexOf(".")+1))
+                    .fileData(file.getBytes())
+                    .savePath(savePath)
+                    .saveFileNm(saveFileNm)
+                    .fileSize(file.getSize())
+                    .build();
 
-        Address address = Address.builder()
-                .postcode(applyRequestDto.getPostcode())
-                .address(applyRequestDto.getAddress())
-                .detailAddress(applyRequestDto.getAddressDetail())
-                .build();
+            Address address = Address.builder()
+                    .postcode(applyRequestDto.getPostcode())
+                    .address(applyRequestDto.getAddress())
+                    .detailAddress(applyRequestDto.getAddressDetail())
+                    .build();
 
-        Document document = Document.builder()
-                .name(applyRequestDto.getName())
-                .residentId(applyRequestDto.getResidentId())
-                .phone(applyRequestDto.getPhone())
-                .recommender(applyRequestDto.getRecommender())
-                .address(address)
-                .image(image)
-                .build();
+            Document document = Document.builder()
+                    .name(applyRequestDto.getName())
+                    .residentId(applyRequestDto.getResidentId())
+                    .phone(applyRequestDto.getPhone())
+                    .recommender(applyRequestDto.getRecommender())
+                    .address(address)
+                    .image(image)
+                    .build();
 
-        documentRepository.save(document);
+            documentRepository.save(document);
 
+        } catch (Exception e) {
+            throw new ApiException(ApiError.INTERNAL_SERVER_ERROR, "File Upload Failed.");
+        }
         return new ApiDataResponse<>("");
     }
 }

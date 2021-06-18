@@ -19,6 +19,9 @@ public class DocumentResponseDto {
     private String residentId;
     private String phone;
     private String address;
+    private String addressDetail;
+    private String addressPostcode;
+    private String fileUrl;
     private String recommender;
     private LocalDateTime createdDate;
 

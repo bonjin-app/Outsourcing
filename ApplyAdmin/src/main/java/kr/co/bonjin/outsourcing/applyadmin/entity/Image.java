@@ -47,4 +47,9 @@ public class Image {
     @Column(name = "save_path", length = 500)
     private String savePath;
 
+    // 파일 데이터
+    @Lob
+    @Column(name = "file_data")
+    private byte[] fileData;
+
 }
