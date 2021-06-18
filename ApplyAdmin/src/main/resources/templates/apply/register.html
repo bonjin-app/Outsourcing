@@ -471,6 +471,9 @@
                         console.log(response);
 
                         location.href = "/apply/complete";
+                    },
+                    error:function(request, status, error){
+                        alert("접수중 오류가 발생했습니다. 다시 시도해주세요.")
                     }
                 });
             }

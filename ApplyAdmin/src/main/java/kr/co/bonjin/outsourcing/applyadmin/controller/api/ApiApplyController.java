@@ -11,12 +11,14 @@ import kr.co.bonjin.outsourcing.applyadmin.exception.ApiException;
 import kr.co.bonjin.outsourcing.applyadmin.repository.DocumentRepository;
 import kr.co.bonjin.outsourcing.applyadmin.service.FileStorageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,11 +31,16 @@ public class ApiApplyController {
 
     @PostMapping
     public ApiResponse register(ApplyRequestDto applyRequestDto, @RequestParam("file") MultipartFile file) {
-        String saveFileNm = UUID.randomUUID().toString();
-        String fileName = file.getOriginalFilename();
-        String savePath = fileStorageService.storeFile(file, saveFileNm);
+
+        List<Document> result = documentRepository.findByPhone(applyRequestDto.getPhone());
+        if (result.size() > 0) {
+            throw new ApiException(ApiError.MISSING_PARAMETER, "Phone Not Unique.");
+        }
 
         try {
+            String saveFileNm = UUID.randomUUID().toString();
+            String fileName = file.getOriginalFilename();
+            String savePath = fileStorageService.storeFile(file, saveFileNm);
             Image image = Image.builder()
                     .fileNm(fileName)
                     .fileExtn(fileName.substring(fileName.lastIndexOf(".")+1))
