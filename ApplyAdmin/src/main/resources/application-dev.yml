@@ -102,3 +102,7 @@ spring:
   banner:
     image:
       location: banner.txt
+
+## Upload PATH
+upload-path:
+  directory: /Users/gigas/Downloads/uploads
