@@ -14,14 +14,20 @@ import java.time.LocalDateTime;
 @Data
 public class DocumentResponseDto {
 
+    private Long id;
     private String name;
     private String residentId;
+    private String phone;
+    private String address;
     private String recommender;
     private LocalDateTime createdDate;
 
     public DocumentResponseDto(Document document) {
+        this.id = document.getId();
         this.name = document.getName();
         this.residentId = document.getResidentId();
+        this.phone = document.getPhone();
+        this.address = document.getAddress().getAddress();
         this.recommender = document.getRecommender();
         this.createdDate = document.getCreatedDate();
     }

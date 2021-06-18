@@ -35,7 +35,7 @@ public class Document extends BaseEntity {
     @Column(name = "recommender")
     private String recommender;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 }

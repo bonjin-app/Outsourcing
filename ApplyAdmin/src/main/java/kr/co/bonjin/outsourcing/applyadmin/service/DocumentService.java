@@ -15,8 +15,11 @@ public interface DocumentService {
 
     default DocumentResponseDto entityToDto(Document entity) {
         DocumentResponseDto dto = DocumentResponseDto.builder()
+                .id(entity.getId())
                 .name(entity.getName())
                 .residentId(entity.getResidentId())
+                .phone(entity.getPhone())
+                .address(entity.getAddress().getAddress())
                 .createdDate(entity.getCreatedDate())
                 .build();
         return dto;
