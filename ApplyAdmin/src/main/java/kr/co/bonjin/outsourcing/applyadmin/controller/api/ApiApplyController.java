@@ -1,5 +1,7 @@
 package kr.co.bonjin.outsourcing.applyadmin.controller.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.bonjin.outsourcing.applyadmin.config.response.ApiDataResponse;
 import kr.co.bonjin.outsourcing.applyadmin.config.response.ApiResponse;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.ApplyRequestDto;
@@ -76,21 +78,28 @@ public class ApiApplyController {
     }
 
     @GetMapping(value = "/sms")
-    public ApiResponse requestSms(String phone) {
+    public ApiResponse requestSms(String phone) throws JsonProcessingException {
         SMSProvider smsProvider = SMSProvider.getInstance();
         String code = smsProvider.excuteGenerate();
-        String result = smsProvider.sendSMS(phone, code);
+        String json = smsProvider.sendSMS(phone, code);
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(json, Map.class);
+
+        String resultCode = String.valueOf(map.get("result_code"));
+        String message = String.valueOf(map.get("message"));
+        String msgId = String.valueOf(map.get("msg_id"));
 
         SmsHistory smsHistory = SmsHistory.builder()
-                .messageId("")
-                .resultCode("")
-                .message("")
+                .messageId(msgId)
+                .resultCode(resultCode)
+                .message(message)
                 .receiver(phone)
                 .authCode(code)
                 .build();
         smsHistoryRepository.save(smsHistory);
 
-        return new ApiDataResponse<>(result);
+        return new ApiDataResponse<>(json);
     }
 
     @PostMapping(value = "/sms/auth")
@@ -104,7 +113,7 @@ public class ApiApplyController {
             return new ApiDataResponse<>(ApiError.MISSING_PARAMETER);
         }
 
-        smsHistory.setIsAuth(true);
+        smsHistory.setAuth(true);
         return new ApiDataResponse<>("");
     }
 }

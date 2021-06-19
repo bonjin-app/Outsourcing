@@ -112,7 +112,25 @@
                             <ul class="data-list">
                                 <li><input type="text" name="name" id="name"  class="required form-control" maxLength="30" placeholder="성명(신청인)"></li>
                                 <li><input type="text" numberonly name="residentId" id="residentId" class="required form-control" maxLength="13" placeholder="주민등록번호"></li>
-                                <li><input type="text" numberonly name="phone" id="phone" class="required form-control" maxLength="11" placeholder="핸드폰번호 010-xxxx-xxxx"></li>
+                                <li>
+                                    <div class="input-group">
+                                        <input type="text" numberonly maxLength="11" name="phone" id="phone" class="form-control" placeholder="핸드폰번호 010-xxxx-xxxx">
+                                        <input type="hidden" name="messageId" id="messageId">
+                                        <input type="hidden" name="isAuth" id="isAuth">
+                                        <div class="input-group-append">
+                                            <button id="smsButton" class="btn btn-sm btn-primary" type="button">인증번호</button>
+                                        </div>
+                                    </div>
+
+                                    <div id="input_sms_confirm" style="display: none;">
+                                        <div class="input-group">
+                                            <input type="text" numberonly maxLength="6" name="authCode" id="authCode" class="form-control" placeholder="인증코드">
+                                            <div class="input-group-append">
+                                                <button id="smsConfirmButton" class="btn btn-sm btn-primary" type="button">확인</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
                         </div><!-- end col-md-6 -->
 

@@ -36,7 +36,7 @@ class SMSProviderTest {
         parameters.add("msg", "%고객명%님. 안녕하세요. API TEST SEND"); // 메세지 내용
         parameters.add("receiver", "01050545654"); // 수신번호
         parameters.add("destination", "01111111112|홍길동"); // 수신인 %고객명% 치환
-        parameters.add("sender", "01050545654"); // 발신번호
+        parameters.add("sender", "01037152256"); // 발신번호
         parameters.add("testmode_yn", "Y"); // Y 인경우 실제문자 전송X , 자동취소(환불) 처리
         parameters.add("title", "인증번호"); //  LMS, MMS 제목 (미입력시 본문중 44Byte 또는 엔터 구분자 첫라인)
         /******************** 전송정보 ********************/

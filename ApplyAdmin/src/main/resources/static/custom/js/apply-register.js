@@ -22,6 +22,71 @@
         performAddress();
     });
 
+    $("#smsButton").click(function() {
+        var $phone = $("#phone");
+        if(!$phone.val()) {
+            alert("핸드폰번호를 입력해주세요.");
+            return false;
+        }
+
+        $.ajax({
+            url: "/api/apply/sms",
+            data: {phone: $phone.val()},
+            success: function (response) {
+                var data = JSON.parse(response.data);
+                console.log(data);
+
+                if (data.result_code > 0) {
+                    alert("인증번호를 발송하였습니다.");
+                    var $messageId = $("#messageId");
+                    $messageId.val(data.msg_id);
+
+                    var $input_sms_confirm = $("#input_sms_confirm");
+                    $input_sms_confirm.css('display', 'block');
+
+                } else {
+                    alert(data.message);
+                }
+            }
+        });
+    });
+
+    $("#smsConfirmButton").click(function() {
+        var $authCode = $("#authCode");
+        if(!$authCode.val() || $authCode.val().length != 6) {
+            alert("인증번호를 입력해주세요.");
+            return false;
+        }
+
+        var $messageId = $("#messageId");
+
+        $.ajax({
+            url: "/api/apply/sms/auth",
+            method: "POST",
+            data: {
+                messageId: $messageId.val(),
+                authCode: $authCode.val()
+            },
+            success: function (response) {
+                if (response.data.code == "1000") {
+                    alert("인증번호가 일치하지 않습니다.");
+
+                } else if (response.data.code == "1001") {
+                    alert("인증요청을 다시 진행해주세요.");
+
+                } else {
+                    alert("인증에 성공하였습니다.");
+                }
+
+                var $isAuth = $("#isAuth");
+                $isAuth.val(true);
+            },
+            error: function(request, status, error){
+                alert("요청중 오류가 발생했습니다. 다시 시도해주세요.")
+            }
+        });
+    });
+
 })();
 
 function isCanvasBlank(canvas) {
@@ -33,6 +98,7 @@ function isCanvasBlank(canvas) {
 function applyValidate(canvas) {
     var $name = $("#name");
     var $residentId = $("#residentId");
+    var $isAuth = $("#isAuth");
     var $phone = $("#phone");
     var $address = $("#address");
     var $addressDetail = $("#addressDetail");
@@ -48,6 +114,10 @@ function applyValidate(canvas) {
 
     } else if (!$phone.val()) {
         alert("핸드폰번호를 입력해주세요.");
+        return false;
+
+    } else if (!$isAuth.val()) {
+        alert("핸드폰인증을 진행해주세요.");
         return false;
 
     } else if (!$address.val()) {

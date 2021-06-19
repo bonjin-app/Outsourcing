@@ -42,5 +42,5 @@ public class SmsHistory extends BaseEntity {
 
     // 인증 완료 여부
     @Column(name = "is_auth")
-    private Boolean isAuth;
+    private boolean isAuth;
 }
