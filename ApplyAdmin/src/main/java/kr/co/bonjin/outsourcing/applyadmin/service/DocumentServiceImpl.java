@@ -36,7 +36,7 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public PageResultDto<DocumentResponseDto, Document> findAllPageableIdolGroups(PageRequestDto pageRequestDto) {
+    public PageResultDto<DocumentResponseDto, Document> findAllPageable(PageRequestDto pageRequestDto) {
         Pageable pageable = pageRequestDto.getPageable(Sort.by("id").descending());
 
         Page<Document> result;

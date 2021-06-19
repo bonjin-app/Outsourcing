@@ -44,7 +44,7 @@ public class DocumentController {
      */
     @GetMapping
     public String listPage(PageRequestDto pageRequestDto, Model model) {
-        PageResultDto<DocumentResponseDto, Document> list = documentService.findAllPageableIdolGroups(pageRequestDto);
+        PageResultDto<DocumentResponseDto, Document> list = documentService.findAllPageable(pageRequestDto);
         model.addAttribute("list", list);
         return "document/list";
     }

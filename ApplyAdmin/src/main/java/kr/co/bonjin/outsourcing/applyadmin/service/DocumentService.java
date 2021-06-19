@@ -20,7 +20,7 @@ public interface DocumentService {
      * @param pageRequestDto
      * @return
      */
-    PageResultDto<DocumentResponseDto, Document> findAllPageableIdolGroups(PageRequestDto pageRequestDto);
+    PageResultDto<DocumentResponseDto, Document> findAllPageable(PageRequestDto pageRequestDto);
 
     /**
      * 단건 조회
