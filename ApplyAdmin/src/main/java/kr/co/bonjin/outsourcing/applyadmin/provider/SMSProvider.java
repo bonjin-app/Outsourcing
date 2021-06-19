@@ -39,10 +39,10 @@ public class SMSProvider {
         /******************** 인증정보 ********************/
 
         /******************** 전송정보 ********************/
-        parameters.add("msg", "["+code+"] 인증 코드 입니다."); // 메세지 내용
+        parameters.add("msg", "["+code+"] 인증번호 입니다."); // 메세지 내용
         parameters.add("receiver", receiver); // 수신번호
         parameters.add("sender", SENDER); // 발신번호
-        parameters.add("testmode_yn", "Y"); // Y 인경우 실제문자 전송X , 자동취소(환불) 처리
+//        parameters.add("testmode_yn", "Y"); // Y 인경우 실제문자 전송X , 자동취소(환불) 처리
         parameters.add("title", "[인증번호]"); //  LMS, MMS 제목 (미입력시 본문중 44Byte 또는 엔터 구분자 첫라인)
         /******************** 전송정보 ********************/
         ResponseEntity<String> entity = restTemplate.postForEntity(url, parameters, String.class);
