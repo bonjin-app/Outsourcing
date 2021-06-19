@@ -114,6 +114,7 @@ public class ApiApplyController {
         }
 
         smsHistory.setAuth(true);
+        smsHistoryRepository.save(smsHistory);
         return new ApiDataResponse<>("");
     }
 }
