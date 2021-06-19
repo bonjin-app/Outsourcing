@@ -76,15 +76,16 @@
 
                 } else {
                     alert("인증에 성공하였습니다.");
-                }
-                var $isAuth = $("#isAuth");
-                $isAuth.val(true);
 
-                $("#phone").attr('disabled', 'disabled');
-                $("#authCode").attr('disabled', 'disabled');
-                $("#smsButton").attr('disabled', 'disabled');
-                $("#smsConfirmButton").attr('disabled', 'disabled');
-                $(".icon-check").css('display', 'block');
+                    var $isAuth = $("#isAuth");
+                    $isAuth.val(true);
+
+                    $("#phone").attr('disabled', 'disabled');
+                    $("#authCode").attr('disabled', 'disabled');
+                    $("#smsButton").attr('disabled', 'disabled');
+                    $("#smsConfirmButton").attr('disabled', 'disabled');
+                    $(".icon-check").css('display', 'block');
+                }
             },
             error: function(request, status, error){
                 alert("요청중 오류가 발생했습니다. 다시 시도해주세요.")
@@ -129,9 +130,9 @@ function applyValidate(canvas) {
         alert("주소를 입력해주세요.");
         return false;
 
-    } else if (!$addressDetail.val()) {
-        alert("상세주소를 입력해주세요.");
-        return false;
+    // } else if (!$addressDetail.val()) {
+    //     alert("상세주소를 입력해주세요.");
+    //     return false;
 
     } else if (isCanvasBlank(canvas)) {
         alert("사인을 진행해주세요.");
