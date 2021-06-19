@@ -77,9 +77,14 @@
                 } else {
                     alert("인증에 성공하였습니다.");
                 }
-
                 var $isAuth = $("#isAuth");
                 $isAuth.val(true);
+
+                $("#phone").attr('disabled', 'disabled');
+                $("#authCode").attr('disabled', 'disabled');
+                $("#smsButton").attr('disabled', 'disabled');
+                $("#smsConfirmButton").attr('disabled', 'disabled');
+                $(".icon-check").css('display', 'block');
             },
             error: function(request, status, error){
                 alert("요청중 오류가 발생했습니다. 다시 시도해주세요.")
