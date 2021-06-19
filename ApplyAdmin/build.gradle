@@ -47,6 +47,10 @@ dependencies {
     // Common IO
     implementation 'commons-io:commons-io:2.6'
 
+    // POI
+    implementation 'org.apache.poi:poi:4.1.2'
+    implementation 'org.apache.poi:poi-ooxml:4.1.2'
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'

@@ -5,7 +5,16 @@ import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageResultDto;
 import kr.co.bonjin.outsourcing.applyadmin.entity.Document;
 
+import java.util.List;
+
 public interface DocumentService {
+
+    /**
+     * 전체 조회
+     * @return
+     */
+    List<DocumentResponseDto> findAll();
+
     /**
      * 전체 조회 - 페이징
      * @param pageRequestDto

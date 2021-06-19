@@ -8,6 +8,11 @@ import kr.co.bonjin.outsourcing.applyadmin.entity.Image;
 import kr.co.bonjin.outsourcing.applyadmin.repository.ImageRepository;
 import kr.co.bonjin.outsourcing.applyadmin.service.DocumentService;
 import lombok.RequiredArgsConstructor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +23,10 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/document")
@@ -60,7 +69,73 @@ public class DocumentController {
     }
 
     /**
-     * IDOL_GROUP 이미지 로드
+     * Excel Download
+     * @param response
+     * @throws IOException
+     */
+    @GetMapping(value = "/excel/download")
+    public void excelDownload(HttpServletResponse response) throws IOException {
+        List<DocumentResponseDto> documents = documentService.findAll();
+
+//        Workbook wb = new HSSFWorkbook();
+        Workbook wb = new XSSFWorkbook();
+        Sheet sheet = wb.createSheet("Document Sheet");
+        Row row = null;
+        Cell cell = null;
+        int rowNum = 0;
+
+        // Header
+        row = sheet.createRow(rowNum++);
+        cell = row.createCell(0);
+        cell.setCellValue("Number");
+        cell = row.createCell(1);
+        cell.setCellValue("Name");
+        cell = row.createCell(2);
+        cell.setCellValue("ResidentId");
+        cell = row.createCell(3);
+        cell.setCellValue("Phone");
+        cell = row.createCell(4);
+        cell.setCellValue("Address");
+        cell = row.createCell(5);
+        cell.setCellValue("AddressDetail");
+        cell = row.createCell(6);
+        cell.setCellValue("AddressPostcode");
+        cell = row.createCell(7);
+        cell.setCellValue("CreateDate");
+
+        // Body
+        for (int i=0; i<documents.size(); i++) {
+            row = sheet.createRow(rowNum++);
+            cell = row.createCell(0);
+            cell.setCellValue(documents.get(i).getId());
+            cell = row.createCell(1);
+            cell.setCellValue(documents.get(i).getName());
+            cell = row.createCell(2);
+            cell.setCellValue(documents.get(i).getResidentId());
+            cell = row.createCell(3);
+            cell.setCellValue(documents.get(i).getPhone());
+            cell = row.createCell(4);
+            cell.setCellValue(documents.get(i).getAddress());
+            cell = row.createCell(5);
+            cell.setCellValue(documents.get(i).getAddressDetail());
+            cell = row.createCell(6);
+            cell.setCellValue(documents.get(i).getAddressPostcode());
+            cell = row.createCell(7);
+            cell.setCellValue(documents.get(i).getCreatedDate());
+        }
+
+        // 컨텐츠 타입과 파일명 지정
+        response.setContentType("ms-vnd/excel");
+//        response.setHeader("Content-Disposition", "attachment;filename=example.xls");
+        response.setHeader("Content-Disposition", "attachment;filename=document.xlsx");
+
+        // Excel File Output
+        wb.write(response.getOutputStream());
+        wb.close();
+    }
+
+    /**
+     * 이미지 로드
      * @return
      */
     @GetMapping(value = "/attachments/{fileId}")

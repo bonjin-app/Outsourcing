@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -21,6 +23,17 @@ import java.util.function.Function;
 public class DocumentServiceImpl implements DocumentService {
 
     private final DocumentRepository documentRepository;
+
+    @Override
+    public List<DocumentResponseDto> findAll() {
+        List<Document> result = documentRepository.findAll();
+        List<DocumentResponseDto> list = result.stream()
+                .map(m -> {
+                    DocumentResponseDto dto = entityToDto(m);
+                    return dto;
+                }).collect(Collectors.toList());
+        return list;
+    }
 
     @Override
     public PageResultDto<DocumentResponseDto, Document> findAllPageableIdolGroups(PageRequestDto pageRequestDto) {
