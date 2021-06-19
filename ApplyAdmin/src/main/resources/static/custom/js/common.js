@@ -1,4 +1,4 @@
-$(function() {
+window.addEventListener('load', function() {
     // 이미지 Drag 방지
     $('img').on('dragstart', function(event) { event.preventDefault(); });
 

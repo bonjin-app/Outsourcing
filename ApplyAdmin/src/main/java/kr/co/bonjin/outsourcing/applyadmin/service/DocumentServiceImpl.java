@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.function.Function;
 
@@ -24,7 +25,16 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public PageResultDto<DocumentResponseDto, Document> findAllPageableIdolGroups(PageRequestDto pageRequestDto) {
         Pageable pageable = pageRequestDto.getPageable(Sort.by("id").descending());
-        Page<Document> result = documentRepository.findAll(pageable);
+
+        Page<Document> result;
+        if (!ObjectUtils.isEmpty(pageRequestDto.getKeyword())) {
+            result = documentRepository.findByNameContainsOrPhoneContains(pageRequestDto.getKeyword(),
+                    pageRequestDto.getKeyword(),
+                    pageable);
+        } else {
+            result = documentRepository.findAll(pageable);
+        }
+
         Function<Document, DocumentResponseDto> fn = (entity -> entityToDto(entity));
         return new PageResultDto<>(result, fn);
     }
