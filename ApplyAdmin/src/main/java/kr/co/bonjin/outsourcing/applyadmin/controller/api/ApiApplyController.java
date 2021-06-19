@@ -6,28 +6,29 @@ import kr.co.bonjin.outsourcing.applyadmin.controller.dto.ApplyRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.entity.Address;
 import kr.co.bonjin.outsourcing.applyadmin.entity.Document;
 import kr.co.bonjin.outsourcing.applyadmin.entity.Image;
+import kr.co.bonjin.outsourcing.applyadmin.entity.SmsHistory;
 import kr.co.bonjin.outsourcing.applyadmin.exception.ApiError;
 import kr.co.bonjin.outsourcing.applyadmin.exception.ApiException;
+import kr.co.bonjin.outsourcing.applyadmin.provider.SMSProvider;
 import kr.co.bonjin.outsourcing.applyadmin.repository.DocumentRepository;
+import kr.co.bonjin.outsourcing.applyadmin.repository.SmsHistoryRepository;
 import kr.co.bonjin.outsourcing.applyadmin.service.FileStorageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/apply")
 public class ApiApplyController {
-
     private final DocumentRepository documentRepository;
     private final FileStorageService fileStorageService;
+    private final SmsHistoryRepository smsHistoryRepository;
 
     @PostMapping
     public ApiResponse register(ApplyRequestDto applyRequestDto, @RequestParam("file") MultipartFile file) {
@@ -71,6 +72,39 @@ public class ApiApplyController {
         } catch (Exception e) {
             throw new ApiException(ApiError.INTERNAL_SERVER_ERROR, "File Upload Failed.");
         }
+        return new ApiDataResponse<>("");
+    }
+
+    @GetMapping(value = "/sms")
+    public ApiResponse requestSms(String phone) {
+        SMSProvider smsProvider = SMSProvider.getInstance();
+        String code = smsProvider.excuteGenerate();
+        String result = smsProvider.sendSMS(phone, code);
+
+        SmsHistory smsHistory = SmsHistory.builder()
+                .messageId("")
+                .resultCode("")
+                .message("")
+                .receiver(phone)
+                .authCode(code)
+                .build();
+        smsHistoryRepository.save(smsHistory);
+
+        return new ApiDataResponse<>(result);
+    }
+
+    @PostMapping(value = "/sms/auth")
+    public ApiResponse requestSmsAuth(String messageId, String authCode) {
+        SmsHistory smsHistory = smsHistoryRepository.findByMessageId(messageId);
+        if (ObjectUtils.isEmpty(smsHistory)) {
+            return new ApiDataResponse<>(ApiError.INVALID_PARAMETER);
+        }
+
+        if (!smsHistory.getAuthCode().equals(authCode)) {
+            return new ApiDataResponse<>(ApiError.MISSING_PARAMETER);
+        }
+
+        smsHistory.setIsAuth(true);
         return new ApiDataResponse<>("");
     }
 }
