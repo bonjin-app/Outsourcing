@@ -58,4 +58,10 @@ public class DocumentServiceImpl implements DocumentService {
         DocumentResponseDto dto = entityToDto(result);
         return dto;
     }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        documentRepository.deleteById(id);
+    }
 }

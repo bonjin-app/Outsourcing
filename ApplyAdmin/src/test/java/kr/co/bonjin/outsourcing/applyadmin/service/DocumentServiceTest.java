@@ -3,6 +3,7 @@ package kr.co.bonjin.outsourcing.applyadmin.service;
 import kr.co.bonjin.outsourcing.applyadmin.entity.Address;
 import kr.co.bonjin.outsourcing.applyadmin.entity.Document;
 import kr.co.bonjin.outsourcing.applyadmin.repository.DocumentRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,5 +41,12 @@ class DocumentServiceTest {
 
                     documentRepository.save(document);
                 });
+    }
+
+    @Test
+    @Disabled
+    @Rollback(false)
+    void 삭제_TEST() {
+        documentRepository.deleteById(118L);
     }
 }

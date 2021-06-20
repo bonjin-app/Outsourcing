@@ -12,4 +12,11 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
     List<Document> findByPhone(String phone);
 
     Page<Document> findByNameContainsOrPhoneContains(String name, String phone, Pageable pageable);
+
+    /**
+     * 한건 삭제
+     * @param id
+     * @return
+     */
+    void deleteById(Long id);
 }

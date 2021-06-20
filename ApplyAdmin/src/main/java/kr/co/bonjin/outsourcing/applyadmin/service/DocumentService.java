@@ -29,6 +29,13 @@ public interface DocumentService {
      */
     DocumentResponseDto findById(Long id);
 
+    /**
+     * 한건 삭제
+     * @param id
+     * @return
+     */
+    void deleteById(Long id);
+
     default DocumentResponseDto entityToDto(Document entity) {
         DocumentResponseDto dto = DocumentResponseDto.builder()
                 .id(entity.getId())

@@ -77,6 +77,9 @@
                                     <a th:href="@{/document}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="mdi mdi-format-list-bulleted text-white-50"></i> 목록
                                     </a>
+                                    <a href="#" class="btn btn-sm btn-danger shadow-sm" data-toggle="modal" data-target="#deleteModal">
+                                        <i class="fas fa-trash text-white-50"></i> 삭제
+                                    </a>
                                 </div>
                             </form>
                         </div>
@@ -84,6 +87,45 @@
                 </div>
             </div>
         </div>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">알림</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">정말 삭제할까요?</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                        <a class="btn btn-danger" href="javascript:void(0)" onclick="onDelete()">삭제</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            /*<![CDATA[*/
+            function onDelete() {
+                var id = [[${document.id}]];
+                var form = document.createElement("form");
+                var input = document.createElement("input");
+                input.setAttribute("type", "hidden");
+                input.setAttribute("name", "id");
+                input.setAttribute("value", id);
+
+                form.action = "/document/delete";
+                form.method = "post";
+                form.appendChild(input);
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+            /*]]>*/
+        </script>
     </div>
 
 </th:block>

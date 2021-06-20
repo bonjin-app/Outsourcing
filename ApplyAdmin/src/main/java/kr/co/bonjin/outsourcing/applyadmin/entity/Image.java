@@ -47,5 +47,4 @@ public class Image {
     @Lob
     @Column(name = "file_data")
     private byte[] fileData;
-
 }
