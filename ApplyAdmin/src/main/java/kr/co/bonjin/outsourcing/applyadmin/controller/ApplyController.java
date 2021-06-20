@@ -6,16 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/apply")
 @RequiredArgsConstructor
 public class ApplyController {
 
-    @GetMapping
+    @GetMapping(value = {"", "/", "apply"})
     public String registerPage() {
         return "apply/register";
     }
 
-    @GetMapping(value = "/complete")
+    @GetMapping(value = "/apply/complete")
     public String completePage() {
         return "apply/complete";
     }

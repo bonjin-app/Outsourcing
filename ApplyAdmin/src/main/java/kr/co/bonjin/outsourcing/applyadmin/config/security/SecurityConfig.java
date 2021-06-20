@@ -55,7 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/**").permitAll()	// API 요청 전체 공개
                 .antMatchers("/member/**").permitAll() // MEMBER 요청 전체 공개
                 .antMatchers("/apply/**").permitAll() // APPLY 요청 전체 공개
-                .antMatchers("/**").authenticated()   // 모든 요청에 대해 인증을 요구하는 규칙
+                .antMatchers("/document/**").authenticated()
+                .antMatchers("/history/**").authenticated()
+                .antMatchers("/**").permitAll()   // 모든 요청에 대해 인증을 요구하는 규칙
 
                 // BasicAuth 사용하여 로그인 요구
 //                .and().httpBasic()  // Confirm 화면
@@ -76,7 +78,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .passwordParameter(Constants.PASSWORD)
 //                        .loginProcessingUrl("/authenticate") // 인증을 처리하는 경로
 //                        .failureUrl("/login/error")
-                    .defaultSuccessUrl("/")    // 직접 로그인시 홈으로 고정
+                    .defaultSuccessUrl("/home")    // 직접 로그인시 홈으로 고정
+                    .successForwardUrl("/home")
                     .failureHandler(failureHandler)
                     .successHandler(successHandler)
                     .permitAll()

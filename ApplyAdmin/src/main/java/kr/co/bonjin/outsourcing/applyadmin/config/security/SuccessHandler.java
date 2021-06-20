@@ -16,7 +16,10 @@ public class SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         System.err.println("SuccessHandler");
 
-        super.onAuthenticationSuccess(request, response, authentication);
+//        super.onAuthenticationSuccess(request, response, authentication);
+
+        // Success Url: /home 으로 고정.
+        response.sendRedirect("/home");
     }
 }
 

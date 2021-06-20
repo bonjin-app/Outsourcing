@@ -10,13 +10,8 @@ public class HomeController {
      * 기본 경로
      * @return
      */
-    @GetMapping(value= "/")
+    @GetMapping(value= "/home")
     public String rootPage() {
         return "home";
-    }
-
-    @GetMapping(value = {"/home", "/main"})
-    public String homePage() {
-        return "redirect:/";
     }
 }

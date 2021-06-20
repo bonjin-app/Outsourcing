@@ -43,7 +43,7 @@
                             <tbody>
                             <!-- Empty Row -->
                             <tr th:if="${list.size == 0}">
-                                <td class="text-center" colspan="4">조회된 정보가 없습니다.</td>
+                                <td class="text-center" colspan="6">조회된 정보가 없습니다.</td>
                             </tr>
 
                             <tr onclick="goDetailPage(this)" th:each="document: ${list.dtoList}" th:attr="data-href=@{/document/{id}(id=${document.id})}">
