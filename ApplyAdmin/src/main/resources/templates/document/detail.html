@@ -8,8 +8,16 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Documents</h4>
-                    <p class="card-description">Detail</p>
+                    <div class="page-header flex-wrap">
+                        <div class="header-left">
+                            <h4 class="card-title">Documents</h4>
+                            <p class="card-description">Detail</p>
+                        </div>
+                        <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
+                            <button type="button" class="btn btn-danger mb-2 py-1" data-toggle="modal" data-target="#deleteModal">
+                            <i class="mdi mdi mdi-delete-variant"></i> 삭제 </button>
+                        </div>
+                    </div>
 
                     <div class="card mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -76,9 +84,6 @@
                                 <div class="py-3 justify-content-between d-sm-flex align-items-center">
                                     <a th:href="@{/document}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="mdi mdi-format-list-bulleted text-white-50"></i> 목록
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-danger shadow-sm" data-toggle="modal" data-target="#deleteModal">
-                                        <i class="fas fa-trash text-white-50"></i> 삭제
                                     </a>
                                 </div>
                             </form>
