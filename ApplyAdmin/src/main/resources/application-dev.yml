@@ -95,6 +95,10 @@ spring:
         # SQL 언어 MariaDB
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
+        # in으로 조회해버린다. 1000개 단위로 (max 1000 db에 따라 다르다.)
+        # 100~1000개가 좋다.
+        default_batch_fetch_size: 1000
+
   # ===============================
   # = BANNER (ANSI Shadow)
   # = http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
