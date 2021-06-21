@@ -107,12 +107,14 @@ public class DocumentController {
         cell = row.createCell(4);
         cell.setCellValue("Gender");
         cell = row.createCell(5);
-        cell.setCellValue("Address");
+        cell.setCellValue("Recommender");
         cell = row.createCell(6);
-        cell.setCellValue("AddressDetail");
+        cell.setCellValue("Address");
         cell = row.createCell(7);
-        cell.setCellValue("AddressPostcode");
+        cell.setCellValue("AddressDetail");
         cell = row.createCell(8);
+        cell.setCellValue("AddressPostcode");
+        cell = row.createCell(9);
         cell.setCellValue("CreateDate");
 
         // Body
@@ -129,12 +131,14 @@ public class DocumentController {
             cell = row.createCell(4);
             cell.setCellValue(documents.get(i).getGender());
             cell = row.createCell(5);
-            cell.setCellValue(documents.get(i).getAddress());
+            cell.setCellValue(documents.get(i).getRecommender());
             cell = row.createCell(6);
-            cell.setCellValue(documents.get(i).getAddressDetail());
+            cell.setCellValue(documents.get(i).getAddress());
             cell = row.createCell(7);
-            cell.setCellValue(documents.get(i).getAddressPostcode());
+            cell.setCellValue(documents.get(i).getAddressDetail());
             cell = row.createCell(8);
+            cell.setCellValue(documents.get(i).getAddressPostcode());
+            cell = row.createCell(9);
             String createDate = documents.get(i).getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             cell.setCellValue(createDate);
         }

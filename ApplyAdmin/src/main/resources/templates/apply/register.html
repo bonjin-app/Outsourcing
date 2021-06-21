@@ -145,6 +145,7 @@
                                     <input type="text" name="address" id="address"  class="required form-control" disabled placeholder="주소">
                                 </li>
                                 <li><input type="text" name="addressDetail" id="addressDetail"  class="required form-control" maxLength="100" placeholder="상세주소"></li>
+                                <li><input type="text" name="recommender" id="recommender"  class="required form-control" maxLength="30" placeholder="추천인"></li>
                                 <li>
                                     <p><strong>성별</strong></p>
                                     <div class="custom-control custom-radio custom-control-inline">
@@ -468,6 +469,7 @@
                 var $address = $("#address");
                 var $addressDetail = $("#addressDetail");
                 var $postcode = $("#postcode");
+                var $recommender = $("#recommender")
                 var $gender = $("input[name=gender]");
 
                 var imgBase64 = canvas.toDataURL('image/jpeg', 'image/octet-stream');
@@ -486,6 +488,7 @@
                 formData.append('address', $address.val());
                 formData.append('addressDetail', $addressDetail.val());
                 formData.append('postcode', $postcode.val());
+                formData.append('recommender', $recommender.val());
                 formData.append('gender', $gender.val());
                 formData.append('dataUrl', dataUrl);
                 formData.append('file', file, fileName);
