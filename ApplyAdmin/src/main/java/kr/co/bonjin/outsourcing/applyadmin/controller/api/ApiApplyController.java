@@ -64,7 +64,7 @@ public class ApiApplyController {
                     .name(applyRequestDto.getName())
                     .residentId(applyRequestDto.getResidentId())
                     .phone(applyRequestDto.getPhone())
-                    .recommender(applyRequestDto.getRecommender())
+                    .gender(applyRequestDto.getGender())
                     .address(address)
                     .image(image)
                     .build();

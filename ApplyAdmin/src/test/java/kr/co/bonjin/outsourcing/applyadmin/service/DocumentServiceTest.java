@@ -35,7 +35,7 @@ class DocumentServiceTest {
                             .name("GIGAS")
                             .phone("01050545654")
                             .residentId("1234561234567")
-                            .recommender("")
+                            .gender("남자")
                             .address(address)
                             .build();
 

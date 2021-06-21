@@ -104,12 +104,14 @@ public class DocumentController {
         cell = row.createCell(3);
         cell.setCellValue("Phone");
         cell = row.createCell(4);
-        cell.setCellValue("Address");
+        cell.setCellValue("Gender");
         cell = row.createCell(5);
-        cell.setCellValue("AddressDetail");
+        cell.setCellValue("Address");
         cell = row.createCell(6);
-        cell.setCellValue("AddressPostcode");
+        cell.setCellValue("AddressDetail");
         cell = row.createCell(7);
+        cell.setCellValue("AddressPostcode");
+        cell = row.createCell(8);
         cell.setCellValue("CreateDate");
 
         // Body
@@ -124,12 +126,14 @@ public class DocumentController {
             cell = row.createCell(3);
             cell.setCellValue(documents.get(i).getPhone());
             cell = row.createCell(4);
-            cell.setCellValue(documents.get(i).getAddress());
+            cell.setCellValue(documents.get(i).getGender());
             cell = row.createCell(5);
-            cell.setCellValue(documents.get(i).getAddressDetail());
+            cell.setCellValue(documents.get(i).getAddress());
             cell = row.createCell(6);
-            cell.setCellValue(documents.get(i).getAddressPostcode());
+            cell.setCellValue(documents.get(i).getAddressDetail());
             cell = row.createCell(7);
+            cell.setCellValue(documents.get(i).getAddressPostcode());
+            cell = row.createCell(8);
             cell.setCellValue(documents.get(i).getCreatedDate());
         }
 

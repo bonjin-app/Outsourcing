@@ -145,7 +145,17 @@
                                     <input type="text" name="address" id="address"  class="required form-control" disabled placeholder="주소">
                                 </li>
                                 <li><input type="text" name="addressDetail" id="addressDetail"  class="required form-control" maxLength="100" placeholder="상세주소"></li>
-                                <li><input type="text" name="recommender" id="recommender"  class="required form-control" maxLength="30" placeholder="추천인"></li>
+                                <li>
+                                    <p><strong>성별</strong></p>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="customRadio" name="gender" value="남자">
+                                        <label class="custom-control-label" for="customRadio">남자</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="customRadio2" name="gender" value="여자">
+                                        <label class="custom-control-label" for="customRadio2">여자</label>
+                                    </div>
+                                </li>
                             </ul>
 
                             <input type="hidden" name="postcode" id="postcode" class="required form-control">
@@ -458,7 +468,7 @@
                 var $address = $("#address");
                 var $addressDetail = $("#addressDetail");
                 var $postcode = $("#postcode");
-                var $recommender = $("#recommender");
+                var $gender = $("input[name=gender]");
 
                 var imgBase64 = canvas.toDataURL('image/jpeg', 'image/octet-stream');
                 var decodImg = atob(imgBase64.split(',')[1]);
@@ -476,7 +486,7 @@
                 formData.append('address', $address.val());
                 formData.append('addressDetail', $addressDetail.val());
                 formData.append('postcode', $postcode.val());
-                formData.append('recommender', $recommender.val());
+                formData.append('gender', $gender.val());
                 formData.append('dataUrl', dataUrl);
                 formData.append('file', file, fileName);
 
