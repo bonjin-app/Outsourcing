@@ -135,7 +135,6 @@ public class DocumentController {
             cell = row.createCell(7);
             cell.setCellValue(documents.get(i).getAddressPostcode());
             cell = row.createCell(8);
-
             String createDate = documents.get(i).getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             cell.setCellValue(createDate);
         }
