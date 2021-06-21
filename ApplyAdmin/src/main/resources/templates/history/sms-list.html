@@ -12,6 +12,12 @@
                             <h4 class="card-title">History SMS</h4>
                             <p class="card-description">List</p>
                         </div>
+                        <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
+                            <form th:action="@{/history/excel/download}" method="get">
+                                <button type="submit" class="btn btn-primary mb-2 py-1">
+                                    <i class="mdi mdi-file-excel"></i> Excel Download </button>
+                            </form>
+                        </div>
                     </div>
 
                     <form th:action="@{/history/sms}" method="get">
