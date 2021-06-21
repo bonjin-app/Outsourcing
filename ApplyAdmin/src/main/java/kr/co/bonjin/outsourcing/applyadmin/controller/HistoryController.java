@@ -1,6 +1,5 @@
 package kr.co.bonjin.outsourcing.applyadmin.controller;
 
-import kr.co.bonjin.outsourcing.applyadmin.controller.dto.DocumentResponseDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.HistoryResponseDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageResultDto;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -94,7 +94,8 @@ public class HistoryController {
             cell = row.createCell(6);
             cell.setCellValue(smsHistory.get(i).isAuth());
             cell = row.createCell(7);
-            cell.setCellValue(smsHistory.get(i).getCreatedDate());
+            String createDate = smsHistory.get(i).getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            cell.setCellValue(createDate);
         }
 
         // 컨텐츠 타입과 파일명 지정

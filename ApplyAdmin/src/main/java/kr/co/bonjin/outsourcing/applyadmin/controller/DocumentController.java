@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -134,7 +135,9 @@ public class DocumentController {
             cell = row.createCell(7);
             cell.setCellValue(documents.get(i).getAddressPostcode());
             cell = row.createCell(8);
-            cell.setCellValue(documents.get(i).getCreatedDate());
+
+            String createDate = documents.get(i).getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            cell.setCellValue(createDate);
         }
 
         // 컨텐츠 타입과 파일명 지정
