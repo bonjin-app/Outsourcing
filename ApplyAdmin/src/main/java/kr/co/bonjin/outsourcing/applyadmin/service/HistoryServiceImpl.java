@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -43,8 +45,27 @@ public class HistoryServiceImpl implements HistoryService {
 
         Page<SmsHistory> result;
         if (!ObjectUtils.isEmpty(pageRequestDto.getKeyword())) {
-            result = historyRepository.findByReceiverContains(pageRequestDto.getKeyword(),
-                                                        pageable);
+
+            if (!ObjectUtils.isEmpty(pageRequestDto.getDate())) {
+                String date = pageRequestDto.getDate();
+                LocalDateTime before = LocalDate.parse(date).atTime(0, 0);
+                LocalDateTime after = LocalDate.parse(date).atTime(23, 0);
+                result = historyRepository.findByReceiverContainsAndCreatedDateBetween(pageRequestDto.getKeyword(),
+                                                                                        before,
+                                                                                        after,
+                                                                                        pageable);
+
+            } else {
+                result = historyRepository.findByReceiverContains(pageRequestDto.getKeyword(),
+                        pageable);
+            }
+
+        } else if (!ObjectUtils.isEmpty(pageRequestDto.getDate())) {
+            String date = pageRequestDto.getDate();
+            LocalDateTime before = LocalDate.parse(date).atTime(0,0);
+            LocalDateTime after = LocalDate.parse(date).atTime(23,0);
+            result = historyRepository.findByCreatedDateBetween(before, after, pageable);
+
         } else {
             result = historyRepository.findAll(pageable);
         }

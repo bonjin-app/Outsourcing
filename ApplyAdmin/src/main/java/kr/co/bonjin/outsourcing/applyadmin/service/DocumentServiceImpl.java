@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -41,9 +43,29 @@ public class DocumentServiceImpl implements DocumentService {
 
         Page<Document> result;
         if (!ObjectUtils.isEmpty(pageRequestDto.getKeyword())) {
-            result = documentRepository.findByNameContainsOrPhoneContains(pageRequestDto.getKeyword(),
-                    pageRequestDto.getKeyword(),
-                    pageable);
+
+            if (!ObjectUtils.isEmpty(pageRequestDto.getDate())) {
+                String date = pageRequestDto.getDate();
+                LocalDateTime before = LocalDate.parse(date).atTime(0,0);
+                LocalDateTime after = LocalDate.parse(date).atTime(23,0);
+                result = documentRepository.findByNameContainsOrPhoneContainsAndCreatedDateBetween(pageRequestDto.getKeyword(),
+                                                                                                pageRequestDto.getKeyword(),
+                                                                                                before,
+                                                                                                after,
+                                                                                                pageable);
+
+            } else {
+                result = documentRepository.findByNameContainsOrPhoneContains(pageRequestDto.getKeyword(),
+                        pageRequestDto.getKeyword(),
+                        pageable);
+            }
+
+        } else if (!ObjectUtils.isEmpty(pageRequestDto.getDate())) {
+            String date = pageRequestDto.getDate();
+            LocalDateTime before = LocalDate.parse(date).atTime(0,0);
+            LocalDateTime after = LocalDate.parse(date).atTime(23,0);
+            result = documentRepository.findByCreatedDateBetween(before, after, pageable);
+
         } else {
             result = documentRepository.findAll(pageable);
         }

@@ -24,19 +24,23 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <button type="submit" class="btn btn-primary"> Search </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="keyword">Search</label>
                                     <div class="input-group col-xs-12">
-                                        <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Search...">
-                                        <span class="input-group-append">
-                                        <button class="btn btn-primary" type="submit"> Search </button>
-                                    </span>
+                                        <input type="text" name="keyword" id="keyword" th:value="${param.keyword}" class="form-control" placeholder="Search...">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="createDate">Date</label>
-                                    <input type="date" class="form-control" id="createDate" name="createDate" max="9999-12-31"/>
+                                    <label for="date">Date</label>
+                                    <input type="date" class="form-control" id="date" name="date" th:value="${param.date}" max="9999-12-31"/>
                                 </div>
                             </div>
                         </div>
@@ -81,31 +85,31 @@
                     <div class="card-footer">
                         <ul class="pagination justify-content-center mb-5">
                             <li class="page-item" th:classappend="${!list.prev} ? 'disabled'">
-                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/history/sms(page=1, keyword=${param.keyword}, createDate=${param.createDate})}" aria-label="Previous">
+                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/history/sms(page=1, keyword=${param.keyword}, date=${param.date})}" aria-label="Previous">
                                     <span aria-hidden="true">«</span>
                                     <span class="sr-only">first-Previous</span>
                                 </a>
                             </li>
                             <li class="page-item" th:classappend="${!list.prev} ? 'disabled'">
-                                <a class="page-link btn btn-sm shadow-sm" th:href="@{//history/sms(page=${list.page -1}, keyword=${param.keyword}, createDate=${param.createDate})}" aria-label="Previous">
+                                <a class="page-link btn btn-sm shadow-sm" th:href="@{//history/sms(page=${list.page -1}, keyword=${param.keyword}, date=${param.date})}" aria-label="Previous">
                                     <span aria-hidden="true">&lsaquo;</span>
                                     <span class="sr-only">Previous</span>
                                 </a>
                             </li>
 
                             <li class="page-item" th:each="page: ${list.pageList}" th:classappend="${page == list.page} ? 'active'">
-                                <a class="page-link btn btn-sm shadow-sm" th:text="${page}" th:href="@{/history/sms(page=${page}, keyword=${param.keyword}, createDate=${param.createDate})}"></a>
+                                <a class="page-link btn btn-sm shadow-sm" th:text="${page}" th:href="@{/history/sms(page=${page}, keyword=${param.keyword}, date=${param.date})}"></a>
                             </li>
 
                             <li class="page-item" th:classappend="${!list.next} ? 'disabled'">
-                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/history/sms(page=${list.page +1}, keyword=${param.keyword}, createDate=${param.createDate})}" aria-label="Previous">
+                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/history/sms(page=${list.page +1}, keyword=${param.keyword}, date=${param.date})}" aria-label="Previous">
                                     <span aria-hidden="true">&rsaquo;</span>
                                     <span class="sr-only">Next</span>
                                 </a>
                             </li>
 
                             <li class="page-item" th:classappend="${!list.next} ? 'disabled'">
-                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/history/sms(page=${list.end}, keyword=${param.keyword}, createDate=${param.createDate})}" aria-label="Next">
+                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/history/sms(page=${list.end}, keyword=${param.keyword}, date=${param.date})}" aria-label="Next">
                                     <span aria-hidden="true">»</span>
                                     <span class="sr-only">last-Next</span>
                                 </a>
