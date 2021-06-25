@@ -21,9 +21,24 @@
                     </div>
 
                     <form th:action="@{/document}" method="get">
-                        <div class="add-items d-flex">
-                            <input type="text" name="keyword" id="keyword" class="form-control todo-list-input" placeholder="Search...">
-                            <button class="btn btn-secondary font-weight-bold">Search</button>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="keyword">Search</label>
+                                    <div class="input-group col-xs-12">
+                                        <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Search...">
+                                        <span class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"> Search </button>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="createDate">Date</label>
+                                    <input type="date" class="form-control" id="createDate" name="createDate" max="9999-12-31"/>
+                                </div>
+                            </div>
                         </div>
                     </form>
 
@@ -41,8 +56,9 @@
                             </thead>
 
                             <tbody>
+
                             <!-- Empty Row -->
-                            <tr th:if="${list.size == 0}">
+                            <tr th:if="${list.dtoList.size == 0}">
                                 <td class="text-center" colspan="6">조회된 정보가 없습니다.</td>
                             </tr>
 
@@ -62,31 +78,31 @@
                     <div class="card-footer">
                         <ul class="pagination justify-content-center mb-5">
                             <li class="page-item" th:classappend="${!list.prev} ? 'disabled'">
-                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/document(page=1, keyword=${param.keyword})}" aria-label="Previous">
+                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/document(page=1, keyword=${param.keyword}, createDate=${param.createDate})}" aria-label="Previous">
                                     <span aria-hidden="true">«</span>
                                     <span class="sr-only">first-Previous</span>
                                 </a>
                             </li>
                             <li class="page-item" th:classappend="${!list.prev} ? 'disabled'">
-                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/document(page=${list.page -1}, keyword=${param.keyword})}" aria-label="Previous">
+                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/document(page=${list.page -1}, keyword=${param.keyword}, createDate=${param.createDate})}" aria-label="Previous">
                                     <span aria-hidden="true">&lsaquo;</span>
                                     <span class="sr-only">Previous</span>
                                 </a>
                             </li>
 
                             <li class="page-item" th:each="page: ${list.pageList}" th:classappend="${page == list.page} ? 'active'">
-                                <a class="page-link btn btn-sm shadow-sm" th:text="${page}" th:href="@{/document(page=${page}, keyword=${param.keyword})}"></a>
+                                <a class="page-link btn btn-sm shadow-sm" th:text="${page}" th:href="@{/document(page=${page}, keyword=${param.keyword}, createDate=${param.createDate})}"></a>
                             </li>
 
                             <li class="page-item" th:classappend="${!list.next} ? 'disabled'">
-                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/document(page=${list.page +1}, keyword=${param.keyword})}" aria-label="Previous">
+                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/document(page=${list.page +1}, keyword=${param.keyword}, createDate=${param.createDate})}" aria-label="Previous">
                                     <span aria-hidden="true">&rsaquo;</span>
                                     <span class="sr-only">Next</span>
                                 </a>
                             </li>
 
                             <li class="page-item" th:classappend="${!list.next} ? 'disabled'">
-                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/document(page=${list.end}, keyword=${param.keyword})}" aria-label="Next">
+                                <a class="page-link btn btn-sm shadow-sm" th:href="@{/document(page=${list.end}, keyword=${param.keyword}, createDate=${param.createDate})}" aria-label="Next">
                                     <span aria-hidden="true">»</span>
                                     <span class="sr-only">last-Next</span>
                                 </a>
