@@ -31,6 +31,10 @@ public class Document extends BaseEntity {
     @Column(name = "phone")
     private String phone;
 
+    // 추천인
+    @Column(name = "recommender")
+    private String recommender;
+
     // 성별
     @Column(name = "gender")
     private String gender;

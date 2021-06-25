@@ -41,6 +41,7 @@ public interface DocumentService {
                 .id(entity.getId())
                 .name(entity.getName())
                 .residentId(entity.getResidentId())
+                .recommender(entity.getRecommender())
                 .gender(entity.getGender())
                 .phone(entity.getPhone())
                 .address(entity.getAddress().getAddress())

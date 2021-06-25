@@ -10,6 +10,7 @@ public class ApplyRequestDto {
     private String phone;
     private String address;
     private String addressDetail;
+    private String recommender;
     private String postcode;
     private String gender;
     private String dataUrl;
