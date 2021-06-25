@@ -14,6 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
@@ -47,8 +48,8 @@ public class HistoryController {
      * @throws IOException
      */
     @GetMapping(value = "/excel/download")
-    public void excelDownload(HttpServletResponse response) throws IOException {
-        List<HistoryResponseDto> smsHistory = historyService.findAll();
+    public void excelDownload(@ModelAttribute PageRequestDto pageRequestDto, HttpServletResponse response) throws IOException {
+        List<HistoryResponseDto> smsHistory = historyService.findAll(pageRequestDto);
 
 //        Workbook wb = new HSSFWorkbook();
         Workbook wb = new XSSFWorkbook();

@@ -16,6 +16,12 @@ public interface DocumentService {
     List<DocumentResponseDto> findAll();
 
     /**
+     * 전체 조회
+     * @return
+     */
+    List<DocumentResponseDto> findAll(PageRequestDto pageRequestDto);
+
+    /**
      * 전체 조회 - 페이징
      * @param pageRequestDto
      * @return

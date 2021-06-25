@@ -40,6 +40,41 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    public List<HistoryResponseDto> findAll(PageRequestDto pageRequestDto) {
+        List<SmsHistory> result;
+        if (!ObjectUtils.isEmpty(pageRequestDto.getKeyword())) {
+
+            if (!ObjectUtils.isEmpty(pageRequestDto.getDate())) {
+                String date = pageRequestDto.getDate();
+                LocalDateTime before = LocalDate.parse(date).atTime(0, 0);
+                LocalDateTime after = LocalDate.parse(date).atTime(23, 0);
+                result = historyRepository.findByReceiverContainsAndCreatedDateBetween(pageRequestDto.getKeyword(),
+                        before,
+                        after);
+
+            } else {
+                result = historyRepository.findByReceiverContains(pageRequestDto.getKeyword());
+            }
+
+        } else if (!ObjectUtils.isEmpty(pageRequestDto.getDate())) {
+            String date = pageRequestDto.getDate();
+            LocalDateTime before = LocalDate.parse(date).atTime(0,0);
+            LocalDateTime after = LocalDate.parse(date).atTime(23,0);
+            result = historyRepository.findByCreatedDateBetween(before, after);
+
+        } else {
+            result = historyRepository.findAll();
+        }
+
+        List<HistoryResponseDto> list = result.stream()
+                .map(m -> {
+                    HistoryResponseDto dto = entityToDto(m);
+                    return dto;
+                }).collect(Collectors.toList());
+        return list;
+    }
+
+    @Override
     public PageResultDto<HistoryResponseDto, SmsHistory> findAllPageable(PageRequestDto pageRequestDto) {
         Pageable pageable = pageRequestDto.getPageable(Sort.by("id").descending());
 

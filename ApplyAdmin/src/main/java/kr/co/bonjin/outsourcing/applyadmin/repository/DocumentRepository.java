@@ -12,6 +12,12 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
 
     List<Document> findByPhone(String phone);
 
+    List<Document> findByNameContainsOrPhoneContains(String name, String phone);
+
+    List<Document> findByNameContainsOrPhoneContainsAndCreatedDateBetween(String name, String phone, LocalDateTime before, LocalDateTime after);
+
+    List<Document> findByCreatedDateBetween(LocalDateTime before, LocalDateTime after);
+
     Page<Document> findByNameContainsOrPhoneContains(String name, String phone, Pageable pageable);
 
     Page<Document> findByNameContainsOrPhoneContainsAndCreatedDateBetween(String name, String phone, LocalDateTime before, LocalDateTime after, Pageable pageable);

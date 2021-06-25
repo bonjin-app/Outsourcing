@@ -1,6 +1,5 @@
 package kr.co.bonjin.outsourcing.applyadmin.service;
 
-import kr.co.bonjin.outsourcing.applyadmin.controller.dto.DocumentResponseDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.HistoryResponseDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageResultDto;
@@ -15,6 +14,12 @@ public interface HistoryService {
      * @return
      */
     List<HistoryResponseDto> findAll();
+
+    /**
+     * 전체 조회
+     * @return
+     */
+    List<HistoryResponseDto> findAll(PageRequestDto pageRequestDto);
 
     /**
      * 전체 조회 - 페이징
