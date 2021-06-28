@@ -48,8 +48,8 @@ public class HistoryServiceImpl implements HistoryService {
         List<SmsHistory> result;
         if (!ObjectUtils.isEmpty(pageRequestDto.getKeyword())) {
 
-            if (!ObjectUtils.isEmpty(pageRequestDto.getDate())) {
-                String date = pageRequestDto.getDate();
+            if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate())) {
+                String date = pageRequestDto.getStartdate();
                 LocalDateTime before = LocalDate.parse(date).atTime(0, 0);
                 LocalDateTime after = LocalDate.parse(date).atTime(23, 0);
                 result = historyRepository.findByReceiverContainsAndCreatedDateBetween(pageRequestDto.getKeyword(),
@@ -60,8 +60,8 @@ public class HistoryServiceImpl implements HistoryService {
                 result = historyRepository.findByReceiverContains(pageRequestDto.getKeyword());
             }
 
-        } else if (!ObjectUtils.isEmpty(pageRequestDto.getDate())) {
-            String date = pageRequestDto.getDate();
+        } else if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate())) {
+            String date = pageRequestDto.getStartdate();
             LocalDateTime before = LocalDate.parse(date).atTime(0,0);
             LocalDateTime after = LocalDate.parse(date).atTime(23,0);
             result = historyRepository.findByCreatedDateBetween(before, after);
@@ -85,8 +85,8 @@ public class HistoryServiceImpl implements HistoryService {
         Page<SmsHistory> result;
         if (!ObjectUtils.isEmpty(pageRequestDto.getKeyword())) {
 
-            if (!ObjectUtils.isEmpty(pageRequestDto.getDate())) {
-                String date = pageRequestDto.getDate();
+            if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate())) {
+                String date = pageRequestDto.getStartdate();
                 LocalDateTime before = LocalDate.parse(date).atTime(0, 0);
                 LocalDateTime after = LocalDate.parse(date).atTime(23, 0);
                 result = historyRepository.findByReceiverContainsAndCreatedDateBetween(pageRequestDto.getKeyword(),
@@ -99,8 +99,8 @@ public class HistoryServiceImpl implements HistoryService {
                         pageable);
             }
 
-        } else if (!ObjectUtils.isEmpty(pageRequestDto.getDate())) {
-            String date = pageRequestDto.getDate();
+        } else if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate())) {
+            String date = pageRequestDto.getStartdate();
             LocalDateTime before = LocalDate.parse(date).atTime(0,0);
             LocalDateTime after = LocalDate.parse(date).atTime(23,0);
             result = historyRepository.findByCreatedDateBetween(before, after, pageable);

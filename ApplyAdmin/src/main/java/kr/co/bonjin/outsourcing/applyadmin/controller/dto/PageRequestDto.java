@@ -16,7 +16,8 @@ public class PageRequestDto {
     private int size;
     private String type;
     private String keyword;
-    private String date;
+    private String startdate;
+    private String enddate;
 
     public PageRequestDto(){
         this.page = 1;
