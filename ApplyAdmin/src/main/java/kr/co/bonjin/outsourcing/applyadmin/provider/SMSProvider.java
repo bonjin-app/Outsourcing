@@ -28,7 +28,7 @@ public class SMSProvider {
         return instance;
     }
 
-    public String sendSMS(String receiver, String code) {
+    public String sendSMS(String receiver, String message) {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://apis.aligo.in/send/"; // 전송요청 URL
 
@@ -39,7 +39,7 @@ public class SMSProvider {
         /******************** 인증정보 ********************/
 
         /******************** 전송정보 ********************/
-        parameters.add("msg", "["+code+"] 인증번호 입니다."); // 메세지 내용
+        parameters.add("msg", message); // 메세지 내용
         parameters.add("receiver", receiver); // 수신번호
         parameters.add("sender", SENDER); // 발신번호
 //        parameters.add("testmode_yn", "Y"); // Y 인경우 실제문자 전송X , 자동취소(환불) 처리

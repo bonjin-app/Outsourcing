@@ -16,6 +16,7 @@ public class HistoryResponseDto {
 
     private Long id;
     private String resultCode;
+    private String sendMessage;
     private String message;
     private String receiver;
     private String messageId;
@@ -26,6 +27,7 @@ public class HistoryResponseDto {
     public HistoryResponseDto(SmsHistory history) {
         this.id = history.getId();
         this.resultCode = history.getResultCode();
+        this.sendMessage = history.getSendMessage();
         this.message = history.getMessage();
         this.receiver = history.getReceiver();
         this.messageId = history.getMessageId();

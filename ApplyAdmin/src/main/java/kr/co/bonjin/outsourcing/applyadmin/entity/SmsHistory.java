@@ -28,6 +28,10 @@ public class SmsHistory extends BaseEntity {
     @Column(name = "result_code")
     private String resultCode;
 
+    // 보낸 메시지
+    @Column(name = "send_message")
+    private String sendMessage;
+
     // 결과 메시지
     @Column(name = "message")
     private String message;

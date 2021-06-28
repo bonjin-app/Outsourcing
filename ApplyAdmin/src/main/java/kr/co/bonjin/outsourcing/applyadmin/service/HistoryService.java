@@ -1,5 +1,6 @@
 package kr.co.bonjin.outsourcing.applyadmin.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.HistoryResponseDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageResultDto;
@@ -21,6 +22,10 @@ public interface HistoryService {
      */
     List<HistoryResponseDto> findAll(PageRequestDto pageRequestDto);
 
+    String sendSMSCode(String receiver) throws JsonProcessingException;
+
+    String sendSMSSuccess(String receiver, String name) throws JsonProcessingException;
+
     /**
      * 전체 조회 - 페이징
      * @param pageRequestDto
@@ -32,6 +37,7 @@ public interface HistoryService {
         HistoryResponseDto dto = HistoryResponseDto.builder()
                 .id(entity.getId())
                 .resultCode(entity.getResultCode())
+                .sendMessage(entity.getSendMessage())
                 .message(entity.getMessage())
                 .receiver(entity.getReceiver())
                 .messageId(entity.getMessageId())

@@ -15,6 +15,7 @@ import kr.co.bonjin.outsourcing.applyadmin.provider.SMSProvider;
 import kr.co.bonjin.outsourcing.applyadmin.repository.DocumentRepository;
 import kr.co.bonjin.outsourcing.applyadmin.repository.SmsHistoryRepository;
 import kr.co.bonjin.outsourcing.applyadmin.service.FileStorageService;
+import kr.co.bonjin.outsourcing.applyadmin.service.HistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
@@ -31,6 +32,7 @@ public class ApiApplyController {
     private final DocumentRepository documentRepository;
     private final FileStorageService fileStorageService;
     private final SmsHistoryRepository smsHistoryRepository;
+    private final HistoryService historyService;
 
     @PostMapping
     public ApiResponse register(ApplyRequestDto applyRequestDto, @RequestParam("file") MultipartFile file) {
@@ -72,6 +74,11 @@ public class ApiApplyController {
 
             documentRepository.save(document);
 
+            // 성공 문자
+            historyService.sendSMSSuccess(applyRequestDto.getPhone(),
+                                            applyRequestDto.getName());
+
+
         } catch (Exception e) {
             throw new ApiException(ApiError.INTERNAL_SERVER_ERROR, "File Upload Failed.");
         }
@@ -80,26 +87,7 @@ public class ApiApplyController {
 
     @GetMapping(value = "/sms")
     public ApiResponse requestSms(String phone) throws JsonProcessingException {
-        SMSProvider smsProvider = SMSProvider.getInstance();
-        String code = smsProvider.excuteGenerate();
-        String json = smsProvider.sendSMS(phone, code);
-
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> map = mapper.readValue(json, Map.class);
-
-        String resultCode = String.valueOf(map.get("result_code"));
-        String message = String.valueOf(map.get("message"));
-        String msgId = String.valueOf(map.get("msg_id"));
-
-        SmsHistory smsHistory = SmsHistory.builder()
-                .messageId(msgId)
-                .resultCode(resultCode)
-                .message(message)
-                .receiver(phone)
-                .authCode(code)
-                .build();
-        smsHistoryRepository.save(smsHistory);
-
+        String json = historyService.sendSMSCode(phone);
         return new ApiDataResponse<>(json);
     }
 

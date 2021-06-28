@@ -52,7 +52,8 @@
                             <tr>
                                 <th>Number</th>
                                 <th>ResultCode</th>
-                                <th>Message</th>
+                                <th>SendMessage</th>
+                                <th>ResultMessage</th>
                                 <th>Receiver</th>
                                 <th>MessageID</th>
                                 <th>AuthCode</th>
@@ -64,12 +65,13 @@
                             <tbody>
                             <!-- Empty Row -->
                             <tr th:if="${list.dtoList.size == 0}">
-                                <td class="text-center" colspan="8">조회된 정보가 없습니다.</td>
+                                <td class="text-center" colspan="9">조회된 정보가 없습니다.</td>
                             </tr>
 
                             <tr th:each="history: ${list.dtoList}">
                                 <td th:text="${history.id}"></td>
                                 <td th:text="${history.resultCode}"></td>
+                                <td th:text="${history.sendMessage}"></td>
                                 <td th:text="${history.message}"></td>
                                 <td th:text="${history.receiver}"></td>
                                 <td th:text="${history.messageId}"></td>
