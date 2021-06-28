@@ -42,10 +42,11 @@ public class DocumentServiceImpl implements DocumentService {
         List<Document> result;
         if (!ObjectUtils.isEmpty(pageRequestDto.getKeyword())) {
 
-            if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate())) {
-                String date = pageRequestDto.getStartdate();
-                LocalDateTime before = LocalDate.parse(date).atTime(0,0);
-                LocalDateTime after = LocalDate.parse(date).atTime(23,0);
+            if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate()) && !ObjectUtils.isEmpty(pageRequestDto.getEnddate())) {
+                String startdate = pageRequestDto.getStartdate();
+                String enddate = pageRequestDto.getEnddate();
+                LocalDateTime before = LocalDate.parse(startdate).atTime(0,0);
+                LocalDateTime after = LocalDate.parse(enddate).atTime(23,0);
                 result = documentRepository.findByNameContainsOrPhoneContainsAndCreatedDateBetween(pageRequestDto.getKeyword(),
                         pageRequestDto.getKeyword(),
                         before,
@@ -56,10 +57,11 @@ public class DocumentServiceImpl implements DocumentService {
                         pageRequestDto.getKeyword());
             }
 
-        } else if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate())) {
-            String date = pageRequestDto.getStartdate();
-            LocalDateTime before = LocalDate.parse(date).atTime(0,0);
-            LocalDateTime after = LocalDate.parse(date).atTime(23,0);
+        } else if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate()) && !ObjectUtils.isEmpty(pageRequestDto.getEnddate())) {
+            String startdate = pageRequestDto.getStartdate();
+            String enddate = pageRequestDto.getEnddate();
+            LocalDateTime before = LocalDate.parse(startdate).atTime(0,0);
+            LocalDateTime after = LocalDate.parse(enddate).atTime(23,0);
             result = documentRepository.findByCreatedDateBetween(before, after);
 
         } else {
@@ -81,10 +83,11 @@ public class DocumentServiceImpl implements DocumentService {
         Page<Document> result;
         if (!ObjectUtils.isEmpty(pageRequestDto.getKeyword())) {
 
-            if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate())) {
-                String date = pageRequestDto.getStartdate();
-                LocalDateTime before = LocalDate.parse(date).atTime(0,0);
-                LocalDateTime after = LocalDate.parse(date).atTime(23,0);
+            if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate()) && !ObjectUtils.isEmpty(pageRequestDto.getEnddate())) {
+                String startdate = pageRequestDto.getStartdate();
+                String enddate = pageRequestDto.getEnddate();
+                LocalDateTime before = LocalDate.parse(startdate).atTime(0,0);
+                LocalDateTime after = LocalDate.parse(enddate).atTime(23,0);
                 result = documentRepository.findByNameContainsOrPhoneContainsAndCreatedDateBetween(pageRequestDto.getKeyword(),
                                                                                                 pageRequestDto.getKeyword(),
                                                                                                 before,
@@ -97,10 +100,11 @@ public class DocumentServiceImpl implements DocumentService {
                         pageable);
             }
 
-        } else if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate())) {
-            String date = pageRequestDto.getStartdate();
-            LocalDateTime before = LocalDate.parse(date).atTime(0,0);
-            LocalDateTime after = LocalDate.parse(date).atTime(23,0);
+        } else if (!ObjectUtils.isEmpty(pageRequestDto.getStartdate()) && !ObjectUtils.isEmpty(pageRequestDto.getEnddate())) {
+            String startdate = pageRequestDto.getStartdate();
+            String enddate = pageRequestDto.getEnddate();
+            LocalDateTime before = LocalDate.parse(startdate).atTime(0,0);
+            LocalDateTime after = LocalDate.parse(enddate).atTime(23,0);
             result = documentRepository.findByCreatedDateBetween(before, after, pageable);
 
         } else {
