@@ -50,6 +50,11 @@ spring:
     username: outsourcing
     password: 1234
 
+    datasource:
+      p6spy:
+        enable-logging: true
+        multiline: true
+
   # ===============================
   # = SERVLET
   # ===============================
