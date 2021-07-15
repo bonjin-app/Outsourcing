@@ -48,7 +48,7 @@ spring:
     # 기본 DB
     url: jdbc:mariadb://gigas.synology.me:3306/outsourcing-applyadmin
     username: outsourcing
-    password: 1234
+    password: Password1234!@#$
 
     datasource:
       p6spy:

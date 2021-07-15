@@ -57,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/apply/**").permitAll() // APPLY 요청 전체 공개
                 .antMatchers("/document/**").authenticated()
                 .antMatchers("/history/**").authenticated()
+                .antMatchers("/home/**").authenticated()
                 .antMatchers("/**").permitAll()   // 모든 요청에 대해 인증을 요구하는 규칙
 
                 // BasicAuth 사용하여 로그인 요구
