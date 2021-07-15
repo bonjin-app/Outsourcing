@@ -1,5 +1,6 @@
 package kr.co.bonjin.outsourcing.applyadmin.controller;
 
+import kr.co.bonjin.outsourcing.applyadmin.controller.dto.DocumentModifyRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.DocumentResponseDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageResultDto;
@@ -91,9 +92,9 @@ public class DocumentController {
      * Document 수정 Process
      * @return
      */
-    @PostMapping(value = "/modify")
-    public String processDocumentModify() {
-
+    @PostMapping(value = "/modify/{id}")
+    public String processDocumentModify(DocumentModifyRequestDto dto) {
+        documentService.update(dto);
         return "redirect:/document/";
     }
 

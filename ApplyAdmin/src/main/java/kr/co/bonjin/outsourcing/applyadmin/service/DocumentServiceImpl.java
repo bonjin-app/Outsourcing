@@ -1,8 +1,10 @@
 package kr.co.bonjin.outsourcing.applyadmin.service;
 
+import kr.co.bonjin.outsourcing.applyadmin.controller.dto.DocumentModifyRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.DocumentResponseDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageResultDto;
+import kr.co.bonjin.outsourcing.applyadmin.entity.Address;
 import kr.co.bonjin.outsourcing.applyadmin.entity.Document;
 import kr.co.bonjin.outsourcing.applyadmin.repository.DocumentRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import org.springframework.util.ObjectUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -126,5 +129,27 @@ public class DocumentServiceImpl implements DocumentService {
     @Transactional
     public void deleteById(Long id) {
         documentRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void update(DocumentModifyRequestDto dto) {
+        Optional<Document> result = documentRepository.findById(dto.getId());
+
+        if (result.isPresent()) {
+            Document document = result.get();
+            Address address = Address.builder()
+                    .address(dto.getAddress())
+                    .detailAddress(dto.getAddressDetail())
+                    .addressPostcode(dto.getAddressPostcode())
+                    .build();
+
+            document.setName(dto.getName());
+            document.setAddress(address);
+            documentRepository.save(document);
+
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }

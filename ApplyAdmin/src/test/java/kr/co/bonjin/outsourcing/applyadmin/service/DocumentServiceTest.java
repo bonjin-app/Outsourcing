@@ -28,7 +28,7 @@ class DocumentServiceTest {
                     Address address = Address.builder()
                             .address("경기도 성남시 분당구 KR 대왕판교로 670")
                             .detailAddress("KR 유스페이스 2 1층")
-                            .postcode("13494")
+                            .addressPostcode("13494")
                             .build();
 
                     Document document = Document.builder()

@@ -34,7 +34,7 @@ public class DocumentResponseDto {
         this.phone = document.getPhone();
         this.address = document.getAddress().getAddress();
         this.addressDetail = document.getAddress().getDetailAddress();
-        this.addressPostcode = document.getAddress().getPostcode();
+        this.addressPostcode = document.getAddress().getAddressPostcode();
         this.fileId = document.getImage().getId();
         this.recommender = document.getRecommender();
         this.recommenderPhone = document.getRecommenderPhone();

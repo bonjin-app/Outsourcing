@@ -159,7 +159,7 @@
                                 </li>
                             </ul>
 
-                            <input type="hidden" name="postcode" id="postcode" class="required form-control">
+                            <input type="hidden" name="addressPostcode" id="addressPostcode" class="required form-control">
                             <input type="hidden" name="file" id="file" class="required form-control">
                         </div><!-- end col-md-6 -->
                     </div><!-- end row -->
@@ -468,7 +468,7 @@
                 var $phone = $("#phone");
                 var $address = $("#address");
                 var $addressDetail = $("#addressDetail");
-                var $postcode = $("#postcode");
+                var $addressPostcode = $("#addressPostcode");
                 var $recommender = $("#recommender")
                 var $gender = $("input[name=gender]");
 
@@ -487,7 +487,7 @@
                 formData.append('phone', $phone.val());
                 formData.append('address', $address.val());
                 formData.append('addressDetail', $addressDetail.val());
-                formData.append('postcode', $postcode.val());
+                formData.append('addressPostcode', $addressPostcode.val());
                 formData.append('recommender', $recommender.val());
                 formData.append('gender', $gender.val());
                 formData.append('dataUrl', dataUrl);

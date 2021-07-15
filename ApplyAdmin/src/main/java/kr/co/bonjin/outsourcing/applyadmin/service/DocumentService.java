@@ -1,5 +1,6 @@
 package kr.co.bonjin.outsourcing.applyadmin.service;
 
+import kr.co.bonjin.outsourcing.applyadmin.controller.dto.DocumentModifyRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.DocumentResponseDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageRequestDto;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageResultDto;
@@ -42,6 +43,12 @@ public interface DocumentService {
      */
     void deleteById(Long id);
 
+    /**
+     * 수정
+     * @param dto
+     */
+    void update(DocumentModifyRequestDto dto);
+
     default DocumentResponseDto entityToDto(Document entity) {
         DocumentResponseDto dto = DocumentResponseDto.builder()
                 .id(entity.getId())
@@ -52,7 +59,7 @@ public interface DocumentService {
                 .phone(entity.getPhone())
                 .address(entity.getAddress().getAddress())
                 .addressDetail(entity.getAddress().getDetailAddress())
-                .addressPostcode(entity.getAddress().getPostcode())
+                .addressPostcode(entity.getAddress().getAddressPostcode())
                 .fileId(entity.getImage().getId())
                 .createdDate(entity.getCreatedDate())
                 .build();

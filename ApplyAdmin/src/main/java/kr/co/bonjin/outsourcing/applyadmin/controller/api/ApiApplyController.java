@@ -1,7 +1,6 @@
 package kr.co.bonjin.outsourcing.applyadmin.controller.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.bonjin.outsourcing.applyadmin.config.response.ApiDataResponse;
 import kr.co.bonjin.outsourcing.applyadmin.config.response.ApiResponse;
 import kr.co.bonjin.outsourcing.applyadmin.controller.dto.ApplyRequestDto;
@@ -11,16 +10,13 @@ import kr.co.bonjin.outsourcing.applyadmin.entity.Image;
 import kr.co.bonjin.outsourcing.applyadmin.entity.SmsHistory;
 import kr.co.bonjin.outsourcing.applyadmin.exception.ApiError;
 import kr.co.bonjin.outsourcing.applyadmin.exception.ApiException;
-import kr.co.bonjin.outsourcing.applyadmin.provider.SMSProvider;
 import kr.co.bonjin.outsourcing.applyadmin.repository.DocumentRepository;
 import kr.co.bonjin.outsourcing.applyadmin.repository.SmsHistoryRepository;
 import kr.co.bonjin.outsourcing.applyadmin.service.FileStorageService;
 import kr.co.bonjin.outsourcing.applyadmin.service.HistoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
@@ -57,7 +53,7 @@ public class ApiApplyController {
                     .build();
 
             Address address = Address.builder()
-                    .postcode(applyRequestDto.getPostcode())
+                    .addressPostcode(applyRequestDto.getAddressPostcode())
                     .address(applyRequestDto.getAddress())
                     .detailAddress(applyRequestDto.getAddressDetail())
                     .build();

@@ -20,8 +20,8 @@ public class Address {
     private Long id;
 
     // 우편번호
-    @Column(name = "postcode")
-    private String postcode;
+    @Column(name = "address_postcode")
+    private String addressPostcode;
 
     // address
     @Column(name = "address")
