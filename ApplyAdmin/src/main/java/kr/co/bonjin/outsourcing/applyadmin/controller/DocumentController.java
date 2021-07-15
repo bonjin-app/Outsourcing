@@ -68,6 +68,36 @@ public class DocumentController {
     }
 
     /**
+     * Document 수정 페이지
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/modify/{id}")
+    public String goDocumentModifyPage(@PathVariable Long id, Model model) {
+
+        DocumentResponseDto document = documentService.findById(id);
+
+        // 값이 없으면 목록으로 Redirect
+        if (ObjectUtils.isEmpty(document)) {
+            return "redirect:/document";
+        }
+
+        model.addAttribute("document", document);
+        return "document/modify";
+    }
+
+    /**
+     * Document 수정 Process
+     * @return
+     */
+    @PostMapping(value = "/modify")
+    public String processDocumentModify() {
+
+        return "redirect:/document/";
+    }
+
+    /**
      * Document 삭제 Process
      * @param id
      * @return
