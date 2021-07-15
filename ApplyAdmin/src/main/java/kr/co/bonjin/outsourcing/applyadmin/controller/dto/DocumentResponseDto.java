@@ -23,6 +23,7 @@ public class DocumentResponseDto {
     private String addressPostcode;
     private Long fileId;
     private String recommender;
+    private String recommenderPhone;
     private String gender;
     private LocalDateTime createdDate;
 
@@ -36,6 +37,7 @@ public class DocumentResponseDto {
         this.addressPostcode = document.getAddress().getPostcode();
         this.fileId = document.getImage().getId();
         this.recommender = document.getRecommender();
+        this.recommenderPhone = document.getRecommenderPhone();
         this.gender = document.getGender();
         this.createdDate = document.getCreatedDate();
     }
