@@ -147,6 +147,8 @@
                                 <li><input type="text" name="addressDetail" id="addressDetail"  class="required form-control" maxLength="100" placeholder="상세주소"></li>
                                 <li><input type="text" name="recommender" id="recommender"  class="required form-control" maxLength="30" placeholder="추천인"></li>
                                 <li>
+                                    <input type="text" numberonly maxLength="11" name="recommenderPhone" id="recommenderPhone" class="form-control" placeholder="추천인 핸드폰번호 010-xxxx-xxxx"></li>
+                                <li>
                                     <p><strong>성별</strong></p>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" class="custom-control-input" id="customRadio" name="gender" value="남자">
@@ -470,6 +472,7 @@
                 var $addressDetail = $("#addressDetail");
                 var $addressPostcode = $("#addressPostcode");
                 var $recommender = $("#recommender")
+                var $recommenderPhone = $("#recommenderPhone")
                 var $gender = $("input[name=gender]");
 
                 var imgBase64 = canvas.toDataURL('image/jpeg', 'image/octet-stream');
@@ -489,6 +492,7 @@
                 formData.append('addressDetail', $addressDetail.val());
                 formData.append('addressPostcode', $addressPostcode.val());
                 formData.append('recommender', $recommender.val());
+                formData.append('recommenderPhone', $recommenderPhone.val());
                 formData.append('gender', $gender.val());
                 formData.append('dataUrl', dataUrl);
                 formData.append('file', file, fileName);

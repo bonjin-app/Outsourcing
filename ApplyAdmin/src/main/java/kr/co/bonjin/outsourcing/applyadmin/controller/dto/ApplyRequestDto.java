@@ -12,6 +12,7 @@ public class ApplyRequestDto {
     private String addressDetail;
     private String addressPostcode;
     private String recommender;
+    private String recommenderPhone;
     private String gender;
     private String dataUrl;
 }

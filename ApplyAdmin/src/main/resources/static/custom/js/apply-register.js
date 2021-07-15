@@ -107,7 +107,6 @@ function applyValidate(canvas) {
     var $isAuth = $("#isAuth");
     var $phone = $("#phone");
     var $address = $("#address");
-    var $addressDetail = $("#addressDetail");
     var $gender = $("input[name=gender]:checked");
     var $terms = $("input[name=terms]");
 
@@ -130,10 +129,6 @@ function applyValidate(canvas) {
     } else if (!$address.val()) {
         alert("주소를 입력해주세요.");
         return false;
-
-    // } else if (!$addressDetail.val()) {
-    //     alert("상세주소를 입력해주세요.");
-    //     return false;
 
     } else if (!$gender.val()) {
         alert("성별을 선택해주세요.");

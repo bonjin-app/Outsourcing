@@ -63,6 +63,7 @@ public class ApiApplyController {
                     .residentId(applyRequestDto.getResidentId())
                     .phone(applyRequestDto.getPhone())
                     .recommender(applyRequestDto.getRecommender())
+                    .recommenderPhone(applyRequestDto.getRecommenderPhone())
                     .gender(applyRequestDto.getGender())
                     .address(address)
                     .image(image)
