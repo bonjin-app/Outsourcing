@@ -9,11 +9,10 @@ import kr.co.bonjin.outsourcing.applyadmin.entity.Image;
 import kr.co.bonjin.outsourcing.applyadmin.repository.ImageRepository;
 import kr.co.bonjin.outsourcing.applyadmin.service.DocumentService;
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.streaming.SXSSFCell;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -118,11 +117,10 @@ public class DocumentController {
     public void excelDownload(PageRequestDto pageRequestDto, HttpServletResponse response) throws IOException {
         List<DocumentResponseDto> documents = documentService.findAll(pageRequestDto);
 
-//        Workbook wb = new HSSFWorkbook();
-        Workbook wb = new XSSFWorkbook();
-        Sheet sheet = wb.createSheet("Document Sheet");
-        Row row = null;
-        Cell cell = null;
+        SXSSFWorkbook wb = new SXSSFWorkbook();
+        SXSSFSheet sheet = wb.createSheet("Document Sheet");
+        SXSSFRow row = null;
+        SXSSFCell cell = null;
         int rowNum = 0;
 
         // Header
