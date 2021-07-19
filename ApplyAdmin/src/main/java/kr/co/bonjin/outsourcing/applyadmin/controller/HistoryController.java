@@ -6,11 +6,10 @@ import kr.co.bonjin.outsourcing.applyadmin.controller.dto.PageResultDto;
 import kr.co.bonjin.outsourcing.applyadmin.entity.SmsHistory;
 import kr.co.bonjin.outsourcing.applyadmin.service.HistoryService;
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.streaming.SXSSFCell;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,10 +51,10 @@ public class HistoryController {
         List<HistoryResponseDto> smsHistory = historyService.findAll(pageRequestDto);
 
 //        Workbook wb = new HSSFWorkbook();
-        Workbook wb = new XSSFWorkbook();
-        Sheet sheet = wb.createSheet("History SMS Sheet");
-        Row row = null;
-        Cell cell = null;
+        SXSSFWorkbook wb = new SXSSFWorkbook();
+        SXSSFSheet sheet = wb.createSheet("Document Sheet");
+        SXSSFRow row = null;
+        SXSSFCell cell = null;
         int rowNum = 0;
 
         // Header
